@@ -79,52 +79,108 @@ proxies:
     request-timeout: 8000
     udp-relay-mode: native
     skip-cert-verify: true
-    congestion-controller: bbr    
+    congestion-controller: bbr
+  - name: quick_ip4
+    server: 108.181.22.239
+    port: 19988
+    type: tuic
+    uuid: 485ce799-da5f-46e8-a82b-8ef322d8602f
+    password: dongtaiwang.com
+    sni: bing.com
+    alpn: [h3]
+    request-timeout: 8000
+    udp-relay-mode: native
+    skip-cert-verify: true
+    congestion-controller: bbr  
+  - {"name":"quick_ip1","type":"hysteria","server":"62.204.54.81","port":37899,"sni":"www.microsoft.com","skip-cert-verify":true,"alpn":["h3"],"protocol":"udp","auth_str":"OdHFS3zC3HlSYJmc0GLQNKLAlwDbJqEmonVBXmI07T0Ojb1bQB","up":5,"down":10}
+  - {"name":"quick_ip3","type":"hysteria","server":"www.dtku50.xyz","port":14751,"sni":"www.microsoft.com","skip-cert-verify":true,"alpn":["h3"],"protocol":"udp","auth_str":"6qSZyyl4eTT8hqPMQxdhIgpxQfTyW1Oq6GBwQVhA2vBOw7QIGY","up":2,"down":10}
 proxy-groups:
   - name: 🚀 节点选择
     type: select
     proxies:
       - ♻️ 自动选择
       - DIRECT
+      - ip0
       - ip1
       - ip2
+      - ip3
+      - ip4
+      - ip5
+      - quick_ip1
+      - quick_ip3
+      - quick_ip4
   - name: ♻️ 自动选择
     type: url-test
     url: https://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
     proxies:
+      - ip0
       - ip1
       - ip2
+      - ip3
+      - ip4
+      - ip5
+      - quick_ip1
+      - quick_ip3
+      - quick_ip4
   - name: 🌍 国外媒体
     type: select
     proxies:
       - 🚀 节点选择
       - ♻️ 自动选择
       - 🎯 全球直连
+      - ip0
       - ip1
       - ip2
+      - ip3
+      - ip4
+      - ip5
+      - quick_ip1
+      - quick_ip3
+      - quick_ip4
   - name: 📲 电报信息
     type: select
     proxies:
       - 🚀 节点选择
       - 🎯 全球直连
+      - ip0
       - ip1
       - ip2
+      - ip3
+      - ip4
+      - ip5
+      - quick_ip1
+      - quick_ip3
+      - quick_ip4
   - name: Ⓜ️ 微软服务
     type: select
     proxies:
       - 🎯 全球直连
       - 🚀 节点选择
+      - ip0
       - ip1
       - ip2
+      - ip3
+      - ip4
+      - ip5
+      - quick_ip1
+      - quick_ip3
+      - quick_ip4
   - name: 🍎 苹果服务
     type: select
     proxies:
       - 🚀 节点选择
       - 🎯 全球直连
+      - ip0
       - ip1
       - ip2
+      - ip3
+      - ip4
+      - ip5
+      - quick_ip1
+      - quick_ip3
+      - quick_ip4
   - name: 🎯 全球直连
     type: select
     proxies:
@@ -147,8 +203,15 @@ proxy-groups:
       - 🚀 节点选择
       - 🎯 全球直连
       - ♻️ 自动选择
+      - ip0
       - ip1
       - ip2
+      - ip3
+      - ip4
+      - ip5
+      - quick_ip1
+      - quick_ip3
+      - quick_ip4
 
 rules:
   - MATCH,🚀 节点选择
