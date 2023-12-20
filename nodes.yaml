@@ -6,14 +6,15 @@ dns:
   enabled: true
   nameserver:
     - 119.29.29.29
-    - 223.5.5.5
+    - 223.6.6.6
+    - 114.114.114.114
   fallback:
     - 8.8.8.8
     - 8.8.4.4
     - tls://1.0.0.1:853
     - tls://dns.google:853
 proxies:
-  - name: ip0
+  - name: meta-ip1-1 
     type: hysteria
     server: 167.160.90.251
     port: 48089
@@ -24,40 +25,18 @@ proxies:
     up: "11 Mbps"
     down: "55 Mbps"
     skip-cert-verify: true 
-  - name: ip1
-    type: hysteria2
-    server: 109.104.152.219
-    port: 22998
-    password: dongtaiwang.com
+  - name: meta-ip1-2 
+    type: hysteria
+    server: 108.181.22.239
+    port: 41146
+    auth-str: dongtaiwang.com
     alpn:
       - h3
-    sni: bing.com
-    skip-cert-verify: true
-    up: "100 Mbps"
-    down: "100 Mbps"
-  - name: ip2 
-    server: tuic3.dtku47.xyz
-    port: 12255
-    type: tuic
-    uuid: ed6a538a-6e66-4f21-a769-4b389bb2f3ab
-    password: dongtaiwang
-    alpn: [h3]
-    request-timeout: 8000
-    udp-relay-mode: native
-    congestion-controller: bbr
-  - name: ip3
-    server: 108.181.24.7
-    port: 23450
-    type: tuic
-    uuid: 3618921b-adeb-4bd3-a2a0-f98b72a674b1
-    password: dongtaiwang
-    sni: bing.com
-    alpn: [h3]
-    request-timeout: 8000
-    udp-relay-mode: native
-    skip-cert-verify: true
-    congestion-controller: bbr
-  - name: ip4
+    protocol: udp
+    up: "11 Mbps"
+    down: "55 Mbps"
+    skip-cert-verify: true   
+  - name: meta-ip2 
     type: hysteria
     server: www.dtku46.xyz
     port: 11223
@@ -68,18 +47,75 @@ proxies:
     up: "11 Mbps"
     down: "55 Mbps"
     skip-cert-verify: true 
-  - name: ip5
-    server: 108.181.22.205
-    port: 50987
-    type: tuic
-    uuid: d6214437-e1b5-4334-9090-8f66b78bea89
-    password: dongtaiwang
-    sni: bing.com
-    alpn: [h3]
-    request-timeout: 8000
-    udp-relay-mode: native
-    skip-cert-verify: true
-    congestion-controller: bbr
+  - name: meta-ip3
+    server: 104.234.70.6
+    type: hysteria
+    port: 16117
+    auth-str: dongtaiwang.com
+    alpn:
+      - h3
+    protocol: udp
+    up: "11 Mbps"
+    down: "55 Mbps"
+    skip-cert-verify: true 
+  - name: meta-ip4 
+    type: hysteria
+    server: 108.181.22.155
+    port: 19721
+    auth-str: dongtaiwang.com
+    alpn:
+      - h3
+    protocol: udp
+    up: "11 Mbps"
+    down: "55 Mbps"
+    skip-cert-verify: true 
+  - name: meta-ip5 
+    server: 104.234.70.41
+    type: hysteria
+    port: 21025
+    auth-str: dongtaiwang.com
+    alpn:
+      - h3
+    protocol: udp
+    up: "11 Mbps"
+    down: "55 Mbps"
+    skip-cert-verify: true 
+   - name: meta-ip6 
+    type: hysteria
+    server: 108.181.22.213
+    port: 52284
+    auth-str: dongtaiwang.com
+    alpn:
+      - h3
+    protocol: udp
+    up: "11 Mbps"
+    down: "55 Mbps"
+    skip-cert-verify: true 
+  - name: hy1_ip1
+    type: hysteria
+    server: 167.160.91.115
+    port: 41189
+    auth-str: "bWAwIqINo7XDm1fUlXQGBifVIXoYs1ylgVKqWFKzK1XyDKuwNF"
+    alpn:
+      - h3
+    protocol: udp
+    up: "11 Mbps"
+    down: "55 Mbps"
+    skip-cert-verify: true 
+    sni: "www.amazon.cn"
+  - name: hy1_ip2
+    type: hysteria
+    server: 108.181.22.239
+    port: 39967
+    auth-str: "dongtaiwang.com"
+    alpn:
+      - h3
+    protocol: udp
+    up: "11 Mbps"
+    down: "55 Mbps"
+    skip-cert-verify: true 
+    sni: "bing.com" 
+    
   - name: quick_ip4
     server: 108.181.22.239
     port: 19988
@@ -134,13 +170,17 @@ proxy-groups:
     proxies:
       - ♻️ 自动选择
       - DIRECT
-      - ip0
-      - ip1
-      - ip2
-      - ip3
-      - ip4
-      - ip5
-      - quick_ip1
+      - meta-ip1-1
+      - meta-ip1-2
+      - meta-ip2
+      - meta-ip3
+      - meta-ip4
+      - meta-ip5
+      - meta-ip6
+      - hy1-ip1
+      - hy1-ip2
+      - quic-ip1-1
+      - quic-ip1-2
       - quick_ip3
       - quick_ip4
   - name: ♻️ 自动选择
@@ -149,13 +189,17 @@ proxy-groups:
     interval: 300
     tolerance: 50
     proxies:
-      - ip0
-      - ip1
-      - ip2
-      - ip3
-      - ip4
-      - ip5
-      - quick_ip1
+      - meta-ip1-1
+      - meta-ip1-2
+      - meta-ip2
+      - meta-ip3
+      - meta-ip4
+      - meta-ip5
+      - meta-ip6
+      - hy1-ip1
+      - hy1-ip2
+      - quic-ip1-1
+      - quic-ip1-2
       - quick_ip3
       - quick_ip4
   - name: 🌍 国外媒体
@@ -164,13 +208,17 @@ proxy-groups:
       - 🚀 节点选择
       - ♻️ 自动选择
       - 🎯 全球直连
-      - ip0
-      - ip1
-      - ip2
-      - ip3
-      - ip4
-      - ip5
-      - quick_ip1
+      - meta-ip1-1
+      - meta-ip1-2
+      - meta-ip2
+      - meta-ip3
+      - meta-ip4
+      - meta-ip5
+      - meta-ip6
+      - hy1-ip1
+      - hy1-ip2
+      - quic-ip1-1
+      - quic-ip1-2
       - quick_ip3
       - quick_ip4
   - name: 📲 电报信息
@@ -178,13 +226,17 @@ proxy-groups:
     proxies:
       - 🚀 节点选择
       - 🎯 全球直连
-      - ip0
-      - ip1
-      - ip2
-      - ip3
-      - ip4
-      - ip5
-      - quick_ip1
+      - meta-ip1-1
+      - meta-ip1-2
+      - meta-ip2
+      - meta-ip3
+      - meta-ip4
+      - meta-ip5
+      - meta-ip6
+      - hy1-ip1
+      - hy1-ip2
+      - quic-ip1-1
+      - quic-ip1-2
       - quick_ip3
       - quick_ip4
   - name: Ⓜ️ 微软服务
@@ -192,13 +244,17 @@ proxy-groups:
     proxies:
       - 🎯 全球直连
       - 🚀 节点选择
-      - ip0
-      - ip1
-      - ip2
-      - ip3
-      - ip4
-      - ip5
-      - quick_ip1
+      - meta-ip1-1
+      - meta-ip1-2
+      - meta-ip2
+      - meta-ip3
+      - meta-ip4
+      - meta-ip5
+      - meta-ip6
+      - hy1-ip1
+      - hy1-ip2
+      - quic-ip1-1
+      - quic-ip1-2
       - quick_ip3
       - quick_ip4
   - name: 🍎 苹果服务
@@ -206,13 +262,17 @@ proxy-groups:
     proxies:
       - 🚀 节点选择
       - 🎯 全球直连
-      - ip0
-      - ip1
-      - ip2
-      - ip3
-      - ip4
-      - ip5
-      - quick_ip1
+      - meta-ip1-1
+      - meta-ip1-2
+      - meta-ip2
+      - meta-ip3
+      - meta-ip4
+      - meta-ip5
+      - meta-ip6
+      - hy1-ip1
+      - hy1-ip2
+      - quic-ip1-1
+      - quic-ip1-2
       - quick_ip3
       - quick_ip4
   - name: 🎯 全球直连
@@ -237,13 +297,17 @@ proxy-groups:
       - 🚀 节点选择
       - 🎯 全球直连
       - ♻️ 自动选择
-      - ip0
-      - ip1
-      - ip2
-      - ip3
-      - ip4
-      - ip5
-      - quick_ip1
+      - meta-ip1-1
+      - meta-ip1-2
+      - meta-ip2
+      - meta-ip3
+      - meta-ip4
+      - meta-ip5
+      - meta-ip6
+      - hy1-ip1
+      - hy1-ip2
+      - quic-ip1-1
+      - quic-ip1-2
       - quick_ip3
       - quick_ip4
 
