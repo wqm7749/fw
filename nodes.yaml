@@ -80,7 +80,7 @@ proxies:
     up: "11 Mbps"
     down: "55 Mbps"
     skip-cert-verify: true 
-   - name: meta-ip6 
+  - name: meta-ip6 
     type: hysteria
     server: 108.181.22.213
     port: 52284
