@@ -241,7 +241,32 @@ proxies:
     request-timeout: 8000
     udp-relay-mode: native
     skip-cert-verify: true
-    congestion-controller: bbr 
+    congestion-controller: bbr
+  - name: singbox-ip1
+    type: hysteria
+    server: www.dtku50.xyz
+    port: 28877
+    auth-str: "y6Sf5xTFyNx5"
+    alpn:
+      - h3
+    protocol: udp
+    up: "50 Mbps"
+    down: "100 Mbps"
+    skip-cert-verify: true 
+    sni: www.dtku50.xyz
+  - name: singbox-ip2
+    type: hysteria
+    server: 108.181.22.213
+    port: 33450
+    auth-str: "dongtaiwang.com"
+    alpn:
+      - h3
+    protocol: udp
+    up: "50 Mbps"
+    down: "100 Mbps"
+    skip-cert-verify: true 
+    sni: "bing.com"
+    
 proxy-groups:
   - name: 🚀 节点选择
     type: select
