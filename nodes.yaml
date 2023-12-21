@@ -91,7 +91,7 @@ proxies:
     up: "11 Mbps"
     down: "55 Mbps"
     skip-cert-verify: true 
-  - name: hy1_ip1
+  - name: hy1-ip1
     type: hysteria
     server: 167.160.91.115
     port: 41189
@@ -103,7 +103,7 @@ proxies:
     down: "55 Mbps"
     skip-cert-verify: true 
     sni: "www.amazon.cn"
-  - name: hy1_ip2
+  - name: hy1-ip2
     type: hysteria
     server: 108.181.22.239
     port: 39967
@@ -116,18 +116,6 @@ proxies:
     skip-cert-verify: true 
     sni: "bing.com" 
     
-  - name: quick_ip4
-    server: 108.181.22.239
-    port: 19988
-    type: tuic
-    uuid: 485ce799-da5f-46e8-a82b-8ef322d8602f
-    password: dongtaiwang.com
-    sni: bing.com
-    alpn: [h3]
-    request-timeout: 8000
-    udp-relay-mode: native
-    skip-cert-verify: true
-    congestion-controller: bbr
   - name: quic-ip1-1
     server: 64.110.25.10
     port: 11227
@@ -163,7 +151,18 @@ proxies:
     down: "10 Mbps"
     skip-cert-verify: true 
     sni: www.amazon.cn
-  
+  - name: quick_ip4
+    server: 108.181.22.239
+    port: 19988
+    type: tuic
+    uuid: 485ce799-da5f-46e8-a82b-8ef322d8602f
+    password: dongtaiwang.com
+    sni: bing.com
+    alpn: [h3]
+    request-timeout: 8000
+    udp-relay-mode: native
+    skip-cert-verify: true
+    congestion-controller: bbr 
 proxy-groups:
   - name: 🚀 节点选择
     type: select
