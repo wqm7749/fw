@@ -109,8 +109,10 @@
       {
         "domain_keyword": [
           "google",
-          "youtube"
-        ]
+          "youtube",
+          "github"
+        ],
+        "outbound": "proxy"
       },
       {
         "type": "logical",
