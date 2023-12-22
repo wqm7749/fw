@@ -107,6 +107,12 @@
         "outbound": "direct"
       },
       {
+        "domain_keyword": [
+          "google",
+          "youtube"
+        ]
+      },
+      {
         "type": "logical",
         "mode": "and",
         "rules": [
