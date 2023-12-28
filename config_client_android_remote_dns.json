@@ -159,8 +159,7 @@
         "domain_keyword": [
           "google",
           "youtube",
-          "github",
-          "facbook"
+          "github"
         ],
         "outbound": "proxy"
       },
