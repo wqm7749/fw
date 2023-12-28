@@ -142,13 +142,13 @@ proxies:
   - name: hy2-ip1
     type: hysteria2
     server: 108.181.22.155
-    port: 40246
+    port: 27710
     password: dongtaiwang.com
     alpn:
       - h3
     sni: www.bing.com
-    up: "20 Mbps"
-    down: "100 Mbps"
+    up: "30 Mbps"
+    down: "200 Mbps"
     skip-cert-verify: true
   - name: hy2-ip2
     type: hysteria2
@@ -164,7 +164,7 @@ proxies:
   - name: hy2-ip3
     type: hysteria2
     server: 108.181.22.155
-    port: 40246
+    port: 27710
     password: dongtaiwang.com
     alpn:
       - h3
