@@ -16,6 +16,8 @@
             "congestion_control": "bbr",
             "tls": {
                 "enabled": true,
+                "insecure": true,
+                "disable_sni": true,
                 "server_name": "",
                 "alpn": [
                     "h3"
