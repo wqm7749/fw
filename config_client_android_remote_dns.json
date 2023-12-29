@@ -228,7 +228,7 @@
       "server_port": 27710,
       "up_mbps": 50,
       "down_mbps": 300,
-      #"ignore_client_bandwidth": true,
+      "tcp_fast_open": true,
       "password": "dongtaiwang.com",
       "tls":
       {
