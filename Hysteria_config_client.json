@@ -15,6 +15,9 @@
       "up_mbps": 20,
       "down_mbps": 100,
       "tcp_fast_open": true,
+      "recv_window_conn": 0,
+      "recv_window": 0,
+      "disable_mtu_discovery": false,
       "auth_str": "",
       "tls":
       {
