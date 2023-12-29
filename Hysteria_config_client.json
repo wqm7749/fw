@@ -1,26 +1,31 @@
+
 {
-    "inbounds": [
-        {
-            "type": "mixed",
-            "listen": "::",
-            "listen_port": 10000
-        }
-    ],
-    "outbounds": [
-        {
-            "type": "hysteria",
-            "server": "",
-            "server_port": 443,
-            "up_mbps": 20,
-            "down_mbps": 100,
-            "auth_str": "",
-            "tls": {
-                "enabled": true,
-                "server_name": "",
-                "alpn": [
-                    "h3"
-                ]
-            }
-        }
-    ]
+  "inbounds": [
+    {
+      "type": "mixed",
+      "listen": "::",
+      "listen_port": 10000
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "hysteria",
+      "server": "",
+      "server_port": 443,
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tcp_fast_open": true,
+      "auth_str": "",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "",
+        "disable_sni": true,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    }
+  ]
 }
