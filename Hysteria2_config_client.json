@@ -12,11 +12,14 @@
             "server": "",
             "server_port": 443,
             "up_mbps": 20,
-            "down_mbps": 100,
+            "down_mbps": 200,
+            "tcp_fast_open": true,
             "password": "",
             "tls": {
                 "enabled": true,
                 "server_name": "",
+                "disable_sni": true,
+                "insecure": true,
                 "alpn": [
                     "h3"
                 ]
