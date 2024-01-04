@@ -9,6 +9,7 @@
   ],
   "outbounds": [
     {
+      "tag": "proxy",
       "type": "hysteria",
       "server": "",
       "server_port": 443,
