@@ -9,6 +9,8 @@
         "tls":
         {
           "enabled": true,
+          "insecure": true,
+          "disable_sni": true,
           "server_name": "xray1.freegradely.xyz",
           "utls":
           {
