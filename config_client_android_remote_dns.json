@@ -10,7 +10,7 @@
     "servers": [
       {
         "tag": "dns_proxy",
-        "address": "https://8.8.4.4/dns-query",
+        "address": "tls://8.8.4.4",
         "address_resolver": "dns_resolver",
         "strategy": "ipv4_only",
         "detour": "proxy"
@@ -217,23 +217,34 @@
       "strict_route": true,
       "stack": "system",
       "sniff": true,
-      "sniff_override_destination": false
-    }
+      "sniff_override_destination": false,
+      "platform": {
+        "http_proxy": {
+          "enabled": true,
+          "server": "127.0.0.1",
+          "server_port": 2080
+        }
+      }
+    },
+    {
+      "type": "mixed",
+      "listen": "127.0.0.1",
+      "listen_port": 2080,
+      "sniff": true,
+      "users": []
+    }    
   ],
   "outbounds": [
     {
       "tag": "proxy",
       "type": "hysteria2",
-      "server": "108.181.22.155",
-      "server_port": 27710,
-      "up_mbps": 50,
-      "down_mbps": 300,
-      "tcp_fast_open": true,
+      "server": "64.110.25.11",
+      "server_port": 33337,
       "password": "dongtaiwang.com",
-      "tls":
-      {
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tls": {
         "enabled": true,
-        "disable_sni": true,
         "server_name": "www.bing.com",
         "insecure": true,
         "alpn": [
