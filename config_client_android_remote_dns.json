@@ -35,6 +35,14 @@
     ],
     "rules": [
       {
+        "domain": [
+          "mirror.ghproxy.com",
+          "cdn.jsdelivr.net",
+          "testingcf.jsdelivr.net"
+        ],
+        "server": "dns_direct"
+      },      
+      {
         "outbound": "any",
         "server": "dns_resolver"
       },
@@ -60,29 +68,29 @@
         "tag": "geosite-geolocation-!cn",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-!cn.srs",
-        "download_detour": "proxy"
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-!cn.srs",
+        "download_detour": "direct"
       },
       {
         "tag": "geoip-cn",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
-        "download_detour": "proxy"
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
+        "download_detour": "direct"
       },
       {
         "tag": "geosite-cn",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
-        "download_detour": "proxy"
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
+        "download_detour": "direct"
       },
       {
         "tag": "geosite-category-companies@cn",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-companies@cn.srs",
-        "download_detour": "proxy"
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-companies@cn.srs",
+        "download_detour": "direct"
       }
     ],
     "rules": [
@@ -91,8 +99,12 @@
         "outbound": "dns-out"
       },
       {
+        "network": "udp",
+        "port": 443,
+        "outbound": "block"
+      },      
+      {
         "protocol": [
-          "quic",
           "stun"
         ],
         "outbound": "block"
@@ -101,6 +113,14 @@
         "domain_suffix": [
           "163.com",
           "eu.org",
+          "51cto.com",
+          "csdn.net",
+          "qq.com",
+          "pa18.com",
+          "pingan.com",
+          "ghproxy.com",
+          "jsdelivr.net",
+          "jsdelivr.net",
           "lingtong.com",
           ".cn"
         ],
