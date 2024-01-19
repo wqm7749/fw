@@ -21,11 +21,11 @@
       "recv_window_conn": 0,
       "recv_window": 0,
       "disable_mtu_discovery": false,
-      "auth_str": "password",
+      "auth_str": "p*",
       "tls":
       {
         "enabled": true,
-        "server_name": "www",
+        "server_name": "w",
         "disable_sni": true,
         "insecure": true,
         "alpn": [
