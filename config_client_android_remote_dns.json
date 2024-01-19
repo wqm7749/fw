@@ -193,7 +193,7 @@
           "com.android.statementservice",
           "com.android.captiveportallogin",
           "com.termux",
-          "com.google.android.marvin.talkback",
+          "com.github.android",       "com.google.android.marvin.talkback",
           "org.fdroid.fdroid",
           "com.google.android.gsf.login",
           "com.github.metacubex.clash.meta",
