@@ -184,7 +184,6 @@
           "com.google.android.apps.translate",
           "com.google.android.apps.maps",
           "vtechnotm.com.deviceid",
-          "android",
           "com.lzplay.helper",
           "com.google.android.gms",
           "com.instagram.android",
@@ -229,6 +228,16 @@
         "outbound": "proxy"
       },
       {
+        "domain_keyword": [
+          "google",
+          "youtube",
+          "github",
+          "facebook",
+          "android"
+        ],
+        "outbound": "proxy"
+      },      
+      {
         "rule_set": [
           "geosite-tiktok",
           "geosite-openai",
@@ -238,16 +247,7 @@
         ],
         "outbound": "proxy"
       },
-      {
-        "domain_keyword": [
-          "google",
-          "youtube",
-          "github",
-          "facebook",
-          "android"
-        ],
-        "outbound": "proxy"
-      },
+
       {
         "type": "logical",
         "mode": "and",
@@ -333,6 +333,7 @@
       {
         "enabled": true,
         "server_name": "www.bing.com",
+        "disable_sni": false,
         "insecure": true,
         "alpn": [
           "h3"
