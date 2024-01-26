@@ -235,8 +235,7 @@
           "google",
           "youtube",
           "github",
-          "facebook",
-          "android"
+          "facebook"
         ],
         "outbound": "proxy"
       },      
