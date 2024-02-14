@@ -1,21 +1,30 @@
+
 {
-    "inbounds": [
-        {
-            "type": "mixed",
-            "listen": "::",
-            "listen_port": 10000
-        }
-    ],
-    "outbounds": [
-        {
-            "type": "shadowsocks",
-            "server": "",
-            "server_port": 80,
-            "method": "2022-blake3-aes-128-gcm",
-            "password": "",
-            "multiplex": {
-                "enabled": true
-            }
-        }
-    ]
+  "inbounds": [
+    {
+      "type": "mixed",
+      "listen": "::",
+      "listen_port": 10000
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "shadowsocks",
+      "server": "",
+      "server_port": 80,
+      "method": "2022-blake3-aes-128-gcm",
+      "password": "",
+      "multiplex":
+      {
+        "enabled": true
+      },
+      "reuse_addr": false,
+      "connect_timeout": "5s",
+      "tcp_fast_open": true,
+      "tcp_multi_path": false,
+      "udp_fragment": false,
+      "domain_strategy": "prefer_ipv4",
+      "fallback_delay": "300ms"
+    }
+  ]
 }
