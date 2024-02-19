@@ -27,7 +27,7 @@
       {
         "enabled": true,
         "server_name": "w",
-        "disable_sni": true,
+        "disable_sni": false,
         "insecure": true,
         "alpn": [
           "h3"
