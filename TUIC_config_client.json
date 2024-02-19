@@ -24,6 +24,8 @@
       "udp_fragment": false,
       "domain_strategy": "prefer_ipv4",
       "fallback_delay": "300ms",
+      "zero_rtt_handshake": false,
+      "auth_timeout": "3s",
       "tls":
       {
         "enabled": true,
