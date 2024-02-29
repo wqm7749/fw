@@ -611,7 +611,7 @@
   
      {
             
-            "tag":  "quick_ip3",
+            "tag":  "quick_ip2",
             "type": "vless",
             "server": "173.242.112.223",
             "server_port": 53019,
