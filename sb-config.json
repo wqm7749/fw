@@ -608,8 +608,7 @@
         ]
       }
     },
-  
-     {
+    {
             
             "tag":  "quick_ip2",
             "type": "vless",
