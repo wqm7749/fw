@@ -437,7 +437,7 @@
       "tag": "hy2_ip13",
       "type": "hysteria2",
       "server": "51.159.77.198",
-      "server_port": 29277,
+      "server_port": 53967,
       "password": "dongtaiwang.com",
       "up_mbps": 20,
       "down_mbps": 100,
@@ -608,33 +608,28 @@
         ]
       }
     },
-    {
-      "tag": "quick_ip2",
-      "type": "hysteria2",
-      "server": "45.150.165.84",
-      "server_port": 8881,
-      "password": "d017e316-82cb-441c-8eea-7b5e9de64a20",
-      "up_mbps": 20,
-      "down_mbps": 100,
-      "tcp_fast_open": true,
-      "connect_timeout": "5s",
-      "tcp_multi_path": false,
-      "udp_fragment": false,
-      "domain_strategy": "prefer_ipv4",
-      "fallback_delay": "300ms",      
-      "obfs": {
-        "type": "salamander",
-        "password": "d017e316-82cb-441c-8eea-7b5e9de64a20"
-      },      
-      "tls": {
-        "enabled": true,
-        #"server_name": "bing.com",
-        "disable_sni": true,
-        "insecure": true,
-        "alpn": [
-          "h3"
-        ]
-      }
+  
+     {
+            
+            "tag":  "quick_ip3",
+            "type": "vless",
+            "server": "173.242.112.223",
+            "server_port": 53019,
+            "uuid": "8497b067-fb80-46f6-9d1e-f448b08a38ab",
+            "flow": "xtls-rprx-vision",
+            "tls": {
+                "enabled": true,
+                "server_name": "addons.mozilla.org",
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "chrome"
+                },
+                "reality": {
+                    "enabled": true,
+                    "public_key": "vIMF9VrPGWZsgY2zsRZyt4mLcnA7bn_dF1UcBi4dv3w"
+                }
+            },
+            "packet_encoding": "xudp"
     },
     {
       "tag": "quick_ip3",
