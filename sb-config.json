@@ -79,7 +79,7 @@
       "strict_route": true,
       "sniff": true,
       "endpoint_independent_nat": false,
-      "stack": "system",
+      "stack": "gvisor", #"system",
       "platform": {
         "http_proxy": {
           "enabled": true,
@@ -437,7 +437,7 @@
       "tag": "hy2_ip13",
       "type": "hysteria2",
       "server": "51.159.77.198",
-      "server_port": 29277,
+      "server_port": 53967,
       "password": "dongtaiwang.com",
       "up_mbps": 20,
       "down_mbps": 100,
