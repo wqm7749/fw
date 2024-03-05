@@ -845,31 +845,22 @@
     },
     {
       "tag": "clash_ip13",
-      "type": "vmess",
-      "server": "fbi.gov",
-      "server_port": 8080,
-      "uuid": "6d34f7f8-eb93-44ea-b5df-4f2f203524a1",
-      "security": "auto",
-      "alter_id": 0,
+      "type": "hysteria",
+      "server": "www.dtku50.xyz",
+      "server_port": 11229,
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "auth_str": "dongtaiwang.com",
+      "disable_mtu_discovery": false,
+      "tcp_fast_open": true,
       "tls":
       {
         "enabled": true,
-        "insecure": true,
-        #"disable_sni": true,
-        "server_name": "larger-marketing-amounts-skin.trycloudflare.com",
-        "utls":
-        {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "packet_encoding": "packetaddr",
-      "transport":
-      {
-        "type": "ws",
-        "path": "6d34f7f8-eb93-44ea-b5df-4f2f203524a1-vm",
-        #"max_early_data": 2048,
-        "early_data_header_name": "Sec-WebSocket-Protocol"
+        "server_name": "bing.com",
+        "disable_sni": false,
+        "alpn": [
+          "h3"
+        ]
       }
     },
   ],
