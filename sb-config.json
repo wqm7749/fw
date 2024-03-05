@@ -833,9 +833,6 @@
       "auth_str": "dongtaiwang.com",
       "disable_mtu_discovery": false,
       "tcp_fast_open": true,
-      "tcp_multi_path": false,
-      "udp_fragment": false,
-      "domain_strategy": "prefer_ipv4",
       "tls":
       {
         "enabled": true,
