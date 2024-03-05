@@ -845,30 +845,33 @@
     },
     {
       "tag": "clash_ip13",
-      "type": "shadowsocks",
-      "method": "2022-blake3-chacha20-poly1305", 
-      "password": "5IH4rBauUuOT4VpAshgMPMSQ3Tf+oJjDY/jEDbIel2Q=",
-      "detour": "stl-6243",
-      "multiplex": {
-        "enabled": true
+      "type": "vmess",
+      "server": "fbi.gov",
+      "server_port": 8080,
+      "uuid": "6d34f7f8-eb93-44ea-b5df-4f2f203524a1",
+      "security": "auto",
+      "alter_id": 0,
+      "tls":
+      {
+        "enabled": true,
+        "insecure": true,
+        #"disable_sni": true,
+        "server_name": "larger-marketing-amounts-skin.trycloudflare.com",
+        "utls":
+        {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "packet_encoding": "packetaddr",
+      "transport":
+      {
+        "type": "ws",
+        "path": "6d34f7f8-eb93-44ea-b5df-4f2f203524a1-vm",
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
       }
     },
-    {
-      "type": "shadowtls",
-      "tag": "stl-6243",
-      "server": "172.83.156.157", 
-      "server_port": 44550,
-      "version": 3, 
-      "password": "FHDLxKgzbcDCPmijble8uT1gddgBmOxA1XXeDgyqgGc=", 
-      "tls": {
-        "enabled": true,
-        "server_name": "nijigen-works.jp", 
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome" 
-        }
-      }
-    }
   ],
   "route":
   {
