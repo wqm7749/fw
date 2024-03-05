@@ -868,7 +868,7 @@
       {
         "type": "ws",
         "path": "6d34f7f8-eb93-44ea-b5df-4f2f203524a1-vm",
-        "max_early_data": 2048,
+        #"max_early_data": 2048,
         "early_data_header_name": "Sec-WebSocket-Protocol"
       }
     },
