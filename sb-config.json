@@ -85,8 +85,8 @@
       "strict_route": true,
       "sniff": true,
       "endpoint_independent_nat": false,
-      "stack": "gvisor",
-       # "system",
+      "stack": "system",
+       # "gvisor",
       "platform":
       {
         "http_proxy":
