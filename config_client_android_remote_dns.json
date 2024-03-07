@@ -10,7 +10,7 @@
     "servers": [
       {
         "tag": "dns_proxy",
-        "address": "tls://8.8.4.4",
+        "address": "tls://dns.google",
         "address_resolver": "dns_resolver",
         "strategy": "ipv4_only",
         "detour": "proxy"
