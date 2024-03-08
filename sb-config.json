@@ -25,7 +25,7 @@
     "servers": [
       {
         "tag": "dns_proxy",
-        "address": "tls://dns.google",
+        "address": "https://dns.google/dns-query",
         "address_resolver": "dns_resolver",
         "strategy": "ipv4_only",
         "detour": "proxy"
