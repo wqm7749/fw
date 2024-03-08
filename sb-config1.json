@@ -119,20 +119,7 @@
         ],
         "outbound": "proxy"
       },      
-      {
-        "type": "logical",
-        "mode": "and",
-        "rules": [
-          {
-            "rule_set": "geoip-cn",
-            "invert": true
-          },
-          {
-            "rule_set": "geosite-geolocation-!cn"
-          }
-        ],
-        "outbound": "proxy"
-      }, 
+
       {
         "domain": [
           "clash.razord.top",
