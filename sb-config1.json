@@ -12,7 +12,7 @@
         "tag": "dns_proxy",
         "address": "tls://dns.google",
         "address_resolver": "dns_resolver",
-        "strategy": "prefer_ipv4",
+        "strategy": "ipv4_only",
         "detour": "proxy"
       },
       {
@@ -37,7 +37,6 @@
         "outbound": "any",
         "server": "dns_resolver"
       },
- 
       {
         "rule_set": "geosite-geolocation-!cn",
         "server": "dns_proxy"
@@ -69,36 +68,6 @@
         "outbound": "dns-out"
       },
       {
-        "protocol": [
-          "stun"
-        ],
-        "outbound": "block"
-      },
-      {
-        "domain": [
-          "mirror.ghproxy.com",
-          "cdn.jsdelivr.net",
-          "testingcf.jsdelivr.net"
-        ],
-        "outbound": "direct"
-      },
-      {
-        "domain_suffix": [
-          "163.com",
-          "eu.org",
-          "51cto.com",
-          "csdn.net",
-          "qq.com",
-          "pa18.com",
-          "pingan.com",
-          "ghproxy.com",
-          "jsdelivr.net",
-          "lingtong.com",
-          ".cn"
-        ],
-        "outbound": "direct"
-      },
-      {
         "type": "logical",
         "mode": "and",
         "rules": [
@@ -111,14 +80,6 @@
           }
         ],
         "outbound": "proxy"
-      },
-      {
-        "rule_set": "geoip-cn",
-        "outbound": "direct"
-      },
-      {
-        "ip_is_private": true,
-        "outbound": "direct"
       },
       {
         "package_name": [
@@ -171,7 +132,44 @@
           "com.zhiliaoapp.musically"
         ],
         "outbound": "proxy"
-      }      
+      },      
+      {
+        "domain": [
+          "clash.razord.top",
+          "yacd.metacubex.one",
+          "yacd.haishan.me",
+          "testingcf.jsdelivr.net",
+          "mirror.ghproxy.com",
+          "d.metacubex.one"
+        ],
+        "outbound": "direct"
+      },      
+      {
+        "domain_suffix": [
+          "163.com",
+          "eu.org",
+          "51cto.com",
+          "csdn.net",
+          "qq.com",
+          "pa18.com",
+          "pingan.com",
+          "ghproxy.com",
+          "mirror.ghproxy.com",
+          "jsdelivr.net",
+          "testingcf.jsdelivr.net",
+          "lingtong.com",
+          ".cn"
+        ],
+        "outbound": "direct"
+      },      
+      {
+        "rule_set": "geoip-cn",
+        "outbound": "direct"
+      },
+      {
+        "ip_is_private": true,
+        "outbound": "direct"
+      }
     ],
     "final": "proxy",
     "auto_detect_interface": true
@@ -460,7 +458,11 @@
       "detour": "stl-6243",
       "multiplex":
       {
-        "enabled": true
+        "enabled": true,
+        "protocol": "h2mux",
+        "max_connections": 1,
+        "min_streams": 4,
+        "padding": false
       }
     },
     {
@@ -525,8 +527,8 @@
       "tls":
       {
         "enabled": true,
-         # "server_name": "www2.dtku48.xyz",
-        "disable_sni": true,
+        "server_name": "www2.dtku48.xyz",
+        "disable_sni": false,
         "insecure": true,
         "alpn": [
           "h3"
