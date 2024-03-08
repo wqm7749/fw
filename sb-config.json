@@ -11,7 +11,7 @@
     {
       "external_controller": "127.0.0.1:9090",
       "external_ui": "ui",
-       # "secret": "Michael",
+      "secret": "Michael",
       "default_mode": "rule"
     },
     "cache_file":
@@ -26,13 +26,20 @@
       {
         "tag": "proxyDns",
         "address": "tls://8.8.8.8",
+        "address_resolver": "dns_resolver",
         "detour": "proxy"
       },
       {
         "tag": "localDns",
         "address": "tls://223.6.6.6",
+        "address_resolver": "dns_resolver",
         "detour": "direct"
       },
+      {
+        "tag": "dns_resolver",
+        "address": "223.5.5.5",
+        "detour": "direct"
+      },      
       {
         "tag": "block",
         "address": "rcode://success"
@@ -54,7 +61,7 @@
       },
       {
         "outbound": "any",
-        "server": "localDns",
+        "server": "dns_resolver",
         "disable_cache": true
       },
       {
@@ -74,7 +81,8 @@
         "server": "proxyDns"
       }
     ],
-    "strategy": "ipv4_only"
+    "strategy": "ipv4_only",
+    "final": "localDns"
   },
   "inbounds": [
     {
@@ -85,7 +93,7 @@
       "strict_route": true,
       "sniff": true,
       "endpoint_independent_nat": false,
-      "stack": "system",
+      "stack": "gvisor",
        # "gvisor",
       "platform":
       {
