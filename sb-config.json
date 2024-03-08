@@ -873,11 +873,11 @@
           "yacd.metacubex.one",
           "yacd.haishan.me",
           "testingcf.jsdelivr.net",
+          "mirror.ghproxy.com",
           "d.metacubex.one"
         ],
         "outbound": "direct"
-      },
-      
+      },      
       {
         "domain_suffix": [
           "163.com",
