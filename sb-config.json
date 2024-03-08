@@ -24,65 +24,40 @@
   {
     "servers": [
       {
-        "tag": "proxyDns",
-        "address": "tls://8.8.8.8",
+        "tag": "dns_proxy",
+        "address": "tls://dns.google",
         "address_resolver": "dns_resolver",
+        "strategy": "ipv4_only",
         "detour": "proxy"
       },
       {
-        "tag": "localDns",
-        "address": "tls://223.6.6.6",
+        "tag": "dns_direct",
+        "address": "https://dns.alidns.com/dns-query",
         "address_resolver": "dns_resolver",
+        "strategy": "ipv4_only",
         "detour": "direct"
       },
       {
         "tag": "dns_resolver",
         "address": "223.5.5.5",
         "detour": "direct"
-      },      
+      },
       {
-        "tag": "block",
+        "tag": "dns_block",
         "address": "rcode://success"
       }
     ],
     "rules": [
       {
-        "domain": [
-          "ghproxy.com",
-          "mirror.ghproxy.com",
-          "cdn.jsdelivr.net",
-          "testingcf.jsdelivr.net"
-        ],
-        "server": "localDns"
-      },
-      {
-        "rule_set": "geosite-category-ads-all",
-        "server": "block"
-      },
-      {
         "outbound": "any",
-        "server": "dns_resolver",
-        "disable_cache": true
-      },
-      {
-        "rule_set": "geosite-cn",
-        "server": "localDns"
-      },
-      {
-        "clash_mode": "direct",
-        "server": "localDns"
-      },
-      {
-        "clash_mode": "global",
-        "server": "proxyDns"
+        "server": "dns_resolver"
       },
       {
         "rule_set": "geosite-geolocation-!cn",
-        "server": "proxyDns"
+        "server": "dns_proxy"
       }
     ],
-    "strategy": "ipv4_only",
-    "final": "localDns"
+    "final": "dns_direct"
   },
   "inbounds": [
     {
@@ -104,13 +79,6 @@
           "server_port": 2080
         }
       }
-    },
-    {
-      "type": "mixed",
-      "listen": "127.0.0.1",
-      "listen_port": 2080,
-      "sniff": true,
-      "users": []
     }
   ],
   "outbounds": [
@@ -882,8 +850,9 @@
         "outbound": "dns-out"
       },
       {
-        "network": "udp",
-        "port": 443,
+        "protocol": [
+          "stun"
+        ],
         "outbound": "block"
       },
       {
