@@ -634,28 +634,23 @@
     },
     {
       "tag": "clash_ip1",
-      "type": "vless",
-      "server": "173.242.112.223",
-      "server_port": 53019,
-      "uuid": "8497b067-fb80-46f6-9d1e-f448b08a38ab",
-      "flow": "xtls-rprx-vision",
+      "type": "hysteria",
+      "server": "173.234.25.50",
+      "server_port": 1992,
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "auth_str": "dongtaiwang.com",
+      "disable_mtu_discovery": false,
+      "tcp_fast_open": true,
       "tls":
       {
         "enabled": true,
-        "server_name": "addons.mozilla.org",
-        "utls":
-        {
-          "enabled": true,
-          "fingerprint": "chrome"
-        },
-        "reality":
-        {
-          "enabled": true,
-          "public_key": "vIMF9VrPGWZsgY2zsRZyt4mLcnA7bn_dF1UcBi4dv3w"
-           # "short_id": ""
-        }
-      },
-      "packet_encoding": "xudp"
+        "server_name": "bing.com",
+        "disable_sni": false,
+        "alpn": [
+          "h3"
+        ]
+      }
     },
     {
       "tag": "clash_ip13",
