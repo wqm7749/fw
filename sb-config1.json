@@ -55,7 +55,7 @@
         "tag": "geosite-google",
         "type": "remote",
         "format": "binary",
-        "url": "https://github.com/SagerNet/sing-geosite/blob/rule-set/geosite-google.srs",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-google.srs",
         "download_detour": "proxy"
       },      
       {
