@@ -394,8 +394,8 @@
     {
       "tag": "hy1_ip4",
       "type": "hysteria",
-      "server": "167.160.91.115",
-      "server_port": 41189,
+      "server": "173.234.25.50",
+      "server_port": 1992,
       "up_mbps": 20,
       "down_mbps": 100,
       "tcp_fast_open": true,
@@ -405,11 +405,11 @@
       "recv_window_conn": 0,
       "recv_window": 0,
       "disable_mtu_discovery": false,
-      "auth_str": "bWAwIqINo7XDm1fUlXQGBifVIXoYs1ylgVKqWFKzK1XyDKuwNF",
+      "auth_str": "dongtaiwang.com",
       "tls":
       {
         "enabled": true,
-        "server_name": "www.amazon.cn",
+        "server_name": "bing.com",
         "disable_sni": false,
         "insecure": true,
         "alpn": [
