@@ -52,6 +52,13 @@
   {
     "rule_set": [
       {
+        "tag": "geosite-google",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/SagerNet/sing-geosite/blob/rule-set/geosite-google.srs",
+        "download_detour": "proxy"
+      },      
+      {
         "tag": "geosite-geolocation-!cn",
         "type": "remote",
         "format": "binary",
