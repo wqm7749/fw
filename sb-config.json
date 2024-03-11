@@ -608,7 +608,7 @@
       "type": "shadowsocks",
       "tag": "quick_ip2",
       "method": "2022-blake3-chacha20-poly1305",
-      "password": "5IH4rBauUuOT4VpAshgMPMSQ3Tf+oJjDY/jEDbIel2Q=",
+      "password": "5IH4rBauUuOT4VpAshgMPMSQ3Tf+oJjDY/jEDbIel2Q="
       "detour": "stl-6243",
       "multiplex":
       {
@@ -622,7 +622,7 @@
     {
       "type": "shadowtls",
       "tag": "stl-6243",
-      "server": "172.83.156.157",
+      "server": "62.204.54.81",
       "server_port": 44550,
       "version": 3,
       "password": "FHDLxKgzbcDCPmijble8uT1gddgBmOxA1XXeDgyqgGc=",
