@@ -12,7 +12,7 @@
         "tag": "dns_proxy",
         "address": "https://cloudflare-dns.com/dns-query",
         "address_resolver": "dns_resolver",
-        "strategy": "prefer_ipv4", #"ipv4_only",
+        "strategy": #"ipv4_only",
         "detour": "proxy"
       },
       {
