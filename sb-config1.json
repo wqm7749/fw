@@ -74,7 +74,6 @@
           "com.google.android.marvin.talkback",
           "com.google.android.apps.maps",
           "com.google.android.webview",
-          "com.android.chrome",
           "com.google.android.syncadapters.contacts",
           "com.google.android.gms",
           "com.google.android.gsf",
