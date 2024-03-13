@@ -55,6 +55,13 @@
         "download_detour": "proxy"
       },
       {
+        "tag": "geosite-geolocation-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-cn.srs",
+        "download_detour": "proxy"
+      },      
+      {
         "tag": "geoip-cn",
         "type": "remote",
         "format": "binary",
@@ -67,6 +74,66 @@
         "protocol": "dns",
         "outbound": "dns-out"
       },
+      {
+        "domain": [
+          "clash.razord.top",
+          "yacd.metacubex.one",
+          "yacd.haishan.me",
+          "testingcf.jsdelivr.net",
+          "mirror.ghproxy.com",
+          "d.metacubex.one"
+        ],
+        "outbound": "direct"
+      },      
+      {
+        "domain_suffix": [
+          "163.com",
+          "eu.org",
+          "51cto.com",
+          "csdn.net",
+          "qq.com",
+          "pa18.com",
+          "pingan.com",
+          "ghproxy.com",
+          "mirror.ghproxy.com",
+          "jsdelivr.net",
+          "testingcf.jsdelivr.net",
+          "lingtong.com",
+          ".cn"
+        ],
+        "outbound": "direct"
+      },      
+      {
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "rule_set": "geoip-cn"
+          },
+          {
+            "rule_set": "geosite-geolocation-cn"
+          }
+        ],
+        "outbound": "direct"
+      }, 
+      {
+        "rule_set": "geoip-cn",
+        "outbound": "direct"
+      },      
+      {
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "rule_set": "geoip-cn",
+            "invert": true
+          },
+          {
+            "rule_set": "geosite-geolocation-!cn"
+          }
+        ],
+        "outbound": "proxy"
+      },      
       {
         "package_name": [
           "com.google.android.youtube",
@@ -118,39 +185,6 @@
           "com.zhiliaoapp.musically"
         ],
         "outbound": "proxy"
-      },
-      {
-        "domain": [
-          "clash.razord.top",
-          "yacd.metacubex.one",
-          "yacd.haishan.me",
-          "testingcf.jsdelivr.net",
-          "mirror.ghproxy.com",
-          "d.metacubex.one"
-        ],
-        "outbound": "direct"
-      },      
-      {
-        "domain_suffix": [
-          "163.com",
-          "eu.org",
-          "51cto.com",
-          "csdn.net",
-          "qq.com",
-          "pa18.com",
-          "pingan.com",
-          "ghproxy.com",
-          "mirror.ghproxy.com",
-          "jsdelivr.net",
-          "testingcf.jsdelivr.net",
-          "lingtong.com",
-          ".cn"
-        ],
-        "outbound": "direct"
-      },      
-      {
-        "rule_set": "geoip-cn",
-        "outbound": "direct"
       },
       {
         "ip_is_private": true,
@@ -680,6 +714,7 @@
         ]
       }
     },
+    
     {
       "type": "direct",
       "tag": "direct"
