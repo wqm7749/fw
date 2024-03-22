@@ -42,7 +42,10 @@
         "server": "dns_direct"
       },      
       {
-        "rule_set": "geosite-android",
+        "rule_set": [
+        "geosite-android",
+        "geosite-google"
+        ],
         "server": "dns_proxy"
       },      
       {
@@ -75,7 +78,14 @@
         "format": "binary",
         "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-android.srs",
         "download_detour": "direct"
-      },       
+      },
+      {
+        "tag": "geosite-google",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-google.srs",
+        "download_detour": "direct"
+      },      
       {
         "tag": "geoip-cn",
         "type": "remote",
@@ -147,7 +157,14 @@
       {
         "rule_set": "geoip-cn",
         "outbound": "direct"
-      },     
+      }, 
+      {
+        "rule_set": [
+        "geosite-android",
+        "geosite-google"
+        ],
+        "outbound": "proxy"
+      },      
       {
         "package_name": [
           "com.google.android.youtube",
