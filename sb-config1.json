@@ -79,6 +79,14 @@
         "outbound": "dns-out"
       },
       {
+        "port": [
+          443,
+          853
+        ],
+        "network": "udp",
+        "outbound": "block"
+      },      
+      {
         "domain": [
           "clash.razord.top",
           "yacd.metacubex.one",
