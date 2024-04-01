@@ -497,8 +497,8 @@
     {
       "tag": "quick_ip1",
       "type": "hysteria2",
-      "server": "51.159.77.153",
-      "server_port": 33390,
+      "server": "www2.dtku48.xyz",
+      "server_port": 48726,
       "password": "dongtaiwang.com",
       "up_mbps": 20,
       "down_mbps": 100,
@@ -577,8 +577,8 @@
     {
       "tag": "quick_ip4",
       "type": "hysteria2",
-      "server": "www2.dtku48.xyz",
-      "server_port": 48726,
+      "server": "51.159.77.153",
+      "server_port": 33390,
       "password": "dongtaiwang.com",
       "up_mbps": 20,
       "down_mbps": 100,
@@ -705,19 +705,18 @@
     },
     {
       "tag": "clash_ip1",
-      "type": "hysteria",
-      "server": "173.234.25.50",
-      "server_port": 1992,
+      "type": "hysteria2",
+      "server": "51.159.199.102",
+      "server_port": 33491,
+      "password": "dongtaiwang.com",
       "up_mbps": 20,
       "down_mbps": 100,
-      "auth_str": "dongtaiwang.com",
-      "disable_mtu_discovery": false,
-      "tcp_fast_open": true,
       "tls":
       {
         "enabled": true,
         "server_name": "bing.com",
         "disable_sni": false,
+        "insecure": true,
         "alpn": [
           "h3"
         ]
