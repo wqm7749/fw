@@ -136,28 +136,10 @@
           "mirror.ghproxy.com",
           "jsdelivr.net",
           "testingcf.jsdelivr.net",
-          "lingtong.com",
-          ".cn"
+          "lingtong.com"
         ],
         "outbound": "direct"
       },      
-      {
-        "type": "logical",
-        "mode": "and",
-        "rules": [
-          {
-            "rule_set": "geoip-cn"
-          },
-          {
-            "rule_set": "geosite-geolocation-cn"
-          }
-        ],
-        "outbound": "direct"
-      }, 
-      {
-        "rule_set": "geoip-cn",
-        "outbound": "direct"
-      }, 
       {
         "rule_set": [
         "geosite-android",
@@ -229,6 +211,23 @@
           }
         ],
         "outbound": "proxy"
+      }, 
+      {
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "rule_set": "geoip-cn"
+          },
+          {
+            "rule_set": "geosite-geolocation-cn"
+          }
+        ],
+        "outbound": "direct"
+      }, 
+      {
+        "rule_set": "geoip-cn",
+        "outbound": "direct"
       },       
       {
         "ip_is_private": true,
@@ -319,7 +318,7 @@
       "tag": "hy2_ip1",
       "type": "hysteria2",
       "server": "64.110.25.11",
-      "server_port": 33337,
+      "server_port": 37021,
       "password": "dongtaiwang.com",
       "up_mbps": 20,
       "down_mbps": 100,
@@ -338,7 +337,7 @@
       "tag": "hy2_ip13",
       "type": "hysteria2",
       "server": "51.159.77.198",
-      "server_port": 53967,
+      "server_port": 20261,
       "password": "dongtaiwang.com",
       "up_mbps": 20,
       "down_mbps": 100,
@@ -394,7 +393,7 @@
     {
       "tag": "hy1_ip1",
       "type": "hysteria",
-      "server": "51.158.54.46",
+      "server": "51.159.79.103",
       "server_port": 55396,
       "up_mbps": 20,
       "down_mbps": 100,
@@ -420,7 +419,7 @@
     {
       "tag": "hy1_ip13",
       "type": "hysteria",
-      "server": "173.234.25.52",
+      "server": "173.234.25.51",
       "server_port": 48919,
       "up_mbps": 20,
       "down_mbps": 100,
@@ -446,8 +445,8 @@
     {
       "tag": "hy1_ip2",
       "type": "hysteria",
-      "server": "www.dtku40.xyz",
-      "server_port": 18490,
+      "server": "167.160.91.117",
+      "server_port": 14455,
       "up_mbps": 20,
       "down_mbps": 100,
       "tcp_fast_open": true,
@@ -472,8 +471,8 @@
     {
       "tag": "hy1_ip4",
       "type": "hysteria",
-      "server": "173.234.25.50",
-      "server_port": 1992,
+      "server": "www.dtku40.xyz",
+      "server_port": 18091,
       "up_mbps": 20,
       "down_mbps": 100,
       "tcp_fast_open": true,
@@ -518,7 +517,7 @@
       "type": "shadowsocks",
       "tag": "quick_ip2",
       "method": "2022-blake3-chacha20-poly1305",
-      "password": "5IH4rBauUuOT4VpAshgMPMSQ3Tf+oJjDY/jEDbIel2Q=",
+      "password": "cNoeQiREIlGx+U/pFoRG126lD9U1RT1zkXjei2UaT2w=",
       "detour": "stl-6243",
       "multiplex":
       {
@@ -532,10 +531,10 @@
     {
       "type": "shadowtls",
       "tag": "stl-6243",
-      "server": "172.83.156.157",
-      "server_port": 44550,
+      "server": "62.204.54.81",
+      "server_port": 33221,
       "version": 3,
-      "password": "FHDLxKgzbcDCPmijble8uT1gddgBmOxA1XXeDgyqgGc=",
+      "password": "lhWGKo/dJHvvMKzuhWX2v1GRIoUOuFb6wCkPLxR2uIk=",
       "tls":
       {
         "enabled": true,
@@ -549,25 +548,27 @@
     },
     {
       "tag": "quick_ip3",
-      "type": "hysteria",
+      "type": "tuic",
       "server": "www.dtku50.xyz",
-      "server_port": 18470,
-      "up_mbps": 20,
-      "down_mbps": 100,
-      "tcp_fast_open": true,
+      "server_port": 22335,
+      "uuid": "ef634e71-99e1-4a08-ac38-a3a5d1db4188",
+      "password": "dongtaiwang.com",
+      "congestion_control": "bbr",
+      "udp_relay_mode": "native",
+      "heartbeat": "10s",
       "connect_timeout": "5s",
-      "domain_strategy": "prefer_ipv4",
+      "tcp_fast_open": true,
+      "udp_over_stream": false,
+      "tcp_multi_path": false,
+      "udp_fragment": false,
       "fallback_delay": "300ms",
-      "recv_window_conn": 0,
-      "recv_window": 0,
-      "disable_mtu_discovery": false,
-      "auth_str": "dongtaiwang.com",
+      "zero_rtt_handshake": false,
       "tls":
       {
         "enabled": true,
-        "server_name": "www.amazon.cn",
-        "disable_sni": false,
         "insecure": true,
+        "disable_sni": false,
+         #"server_name": "*",
         "alpn": [
           "h3"
         ]
@@ -575,23 +576,16 @@
     },
     {
       "tag": "quick_ip4",
-      "type": "hysteria",
+      "type": "hysteria2",
       "server": "www2.dtku48.xyz",
-      "server_port": 22334,
+      "server_port": 48726,
+      "password": "dongtaiwang.com",
       "up_mbps": 20,
       "down_mbps": 100,
-      "tcp_fast_open": true,
-      "connect_timeout": "5s",
-      "domain_strategy": "prefer_ipv4",
-      "fallback_delay": "300ms",
-      "recv_window_conn": 0,
-      "recv_window": 0,
-      "disable_mtu_discovery": false,
-      "auth_str": "dongtaiwang.com",
       "tls":
       {
         "enabled": true,
-        "server_name": "www2.dtku48.xyz",
+        "server_name": "bing.com",
         "disable_sni": false,
         "insecure": true,
         "alpn": [
