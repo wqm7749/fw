@@ -283,6 +283,10 @@
         "xray_ip2",
         "xray_ip3",
         "xray_ip4",
+        "sing_ip1",
+        "sing_ip2",
+        "sing_ip3",
+        "sing_ip4",
         "clash_ip1",
         "clash_ip2",
         "clash_ip3",
@@ -310,6 +314,10 @@
         "xray_ip2",
         "xray_ip3",
         "xray_ip4",
+        "sing_ip1",
+        "sing_ip2",
+        "sing_ip3",
+        "sing_ip4",        
         "clash_ip1",
         "clash_ip2",
         "clash_ip3",
@@ -524,7 +532,7 @@
       "tag": "quick_ip2",
       "method": "2022-blake3-chacha20-poly1305",
       "password": "cNoeQiREIlGx+U/pFoRG126lD9U1RT1zkXjei2UaT2w=",
-      "detour": "stl-6243",
+      "detour": "quick_ip2_stls",
       "multiplex":
       {
         "enabled": true,
@@ -536,7 +544,7 @@
     },
     {
       "type": "shadowtls",
-      "tag": "stl-6243",
+      "tag": "quick_ip2_stls",
       "server": "62.204.54.81",
       "server_port": 33221,
       "version": 3,
@@ -547,7 +555,7 @@
         "server_name": "nijigen-works.jp",
         "utls":
         {
-          "enabled": true,
+          "enabled": false,
           "fingerprint": "chrome"
         }
       }
@@ -621,7 +629,7 @@
     {
       "tag": "xray_ip2",
       "type": "vless",
-      "server": "yh5.freeh1.xyz",
+      "server": "23.227.39.12",
       "server_port": 443,
       "uuid": "ebfdccb6-7416-4b6e-860d-98587344d500",
       "tls":
@@ -709,6 +717,122 @@
         "early_data_header_name": "Sec-WebSocket-Protocol"
       }
     },
+    {
+      "type": "shadowsocks",
+      "tag": "sing_ip1",
+      "method": "2022-blake3-chacha20-poly1305", 
+      "password": "cNoeQiREIlGx+U/pFoRG126lD9U1RT1zkXjei2UaT2w=",
+      "detour": "sing_ip1_stls",
+      "multiplex": {
+        "enabled": true,
+        "protocol": "h2mux",
+        "max_connections": 1,
+        "min_streams": 4,
+        "padding": false
+      }
+    },
+    {
+      "type": "shadowtls",
+      "tag": "sing_ip1_stls",
+      "server": "45.150.165.121", 
+      "server_port": 33221,
+      "version": 3, 
+      "password": "lhWGKo/dJHvvMKzuhWX2v1GRIoUOuFb6wCkPLxR2uIk=", 
+      "tls": {
+        "enabled": true,
+        "server_name": "nijigen-works.jp", 
+        "utls": {
+          "enabled": false,
+          "fingerprint": "chrome" 
+        }
+      }
+    },
+    {
+      "tag": "sing_ip2",
+      "type": "hysteria",
+      "server": "www.dtku50.xyz",
+      "server_port": 48919,
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tcp_fast_open": true,
+      "connect_timeout": "5s",
+      "domain_strategy": "prefer_ipv4",
+      "fallback_delay": "300ms",
+      "recv_window_conn": 0,
+      "recv_window": 0,
+      "disable_mtu_discovery": false,
+      "auth_str": "dongtaiwang.com",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "type": "shadowsocks",
+      "tag": "sing_ip3",
+      "method": "2022-blake3-chacha20-poly1305", 
+      "password": "6qfEwR4QOrHq+k3csNdEZgMa+Y890g/eouGnVEtxb0c=",
+      "detour": "sing_ip3_stls",
+      "multiplex": {
+        "enabled": true,
+        "protocol": "h2mux",
+        "max_connections": 1,
+        "min_streams": 4,
+        "padding": false
+      }
+    },
+    {
+      "type": "shadowtls",
+      "tag": "sing_ip3_stls",
+      "server": "www2.dtku44.xyz", 
+      "server_port": 443,
+      "version": 3, 
+      "password": "LdjpJtNZK+2WhXfRY+FxR9sokcOYoddKAx8dN7q8FOI=", 
+      "tls": {
+        "enabled": true,
+        "server_name": "nijigen-works.jp", 
+        "utls": {
+          "enabled": false,
+          "fingerprint": "chrome" 
+        }
+      }
+    },
+    {
+      "type": "shadowsocks",
+      "tag": "sing_ip4",
+      "method": "2022-blake3-chacha20-poly1305", 
+      "password": "5IH4rBauUuOT4VpAshgMPMSQ3Tf+oJjDY/jEDbIel2Q=",
+      "detour": "sing_ip4_stls",
+      "multiplex": {
+        "enabled": true,
+        "protocol": "h2mux",
+        "max_connections": 1,
+        "min_streams": 4,
+        "padding": false
+      }
+    },
+    {
+      "type": "shadowtls",
+      "tag": "sing_ip4_stls",
+      "server": "172.83.156.157", 
+      "server_port": 44550,
+      "version": 3, 
+      "password": "FHDLxKgzbcDCPmijble8uT1gddgBmOxA1XXeDgyqgGc=", 
+      "tls": {
+        "enabled": true,
+        "server_name": "nijigen-works.jp", 
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome" 
+        }
+      }
+    },    
     {
       "tag": "clash_ip1",
       "type": "hysteria2",
