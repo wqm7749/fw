@@ -286,6 +286,7 @@
         "clash_ip1",
         "clash_ip2",
         "clash_ip3",
+        "clash_ip6",
         "clash_ip13"
       ]   
     },
@@ -312,6 +313,7 @@
         "clash_ip1",
         "clash_ip2",
         "clash_ip3",
+        "clash_ip6",
         "clash_ip13"
       ],
       "url": "http://www.gstatic.com/generate_204",
@@ -619,7 +621,7 @@
     {
       "tag": "xray_ip2",
       "type": "vless",
-      "server": "yh1.dtku41.xyz",
+      "server": "yh5.freeh1.xyz",
       "server_port": 443,
       "uuid": "ebfdccb6-7416-4b6e-860d-98587344d500",
       "tls":
@@ -679,7 +681,7 @@
     {
       "tag": "xray_ip4",
       "type": "vless",
-      "server": "fbi.gov",
+      "server": "yh3.freeh1.xyz",
       "server_port": 443,
       "uuid": "ebfdccb6-7416-4b6e-860d-98587344d500",
       "packet_encoding": "xudp",
@@ -802,7 +804,26 @@
           "h3"
         ]
       }
-    },  
+    },
+    {
+      "tag": "clash_ip6",
+      "type": "hysteria2",
+      "server": "www.dtku40.xyz",
+      "server_port": 22334,
+      "password": "dongtaiwang.com",
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },    
     {
       "type": "direct",
       "tag": "direct"
