@@ -284,6 +284,7 @@
         "xray_ip3",
         "xray_ip4",
         "clash_ip1",
+        "clash_ip2",
         "clash_ip13"
       ]   
     },
@@ -308,6 +309,7 @@
         "xray_ip3",
         "xray_ip4",
         "clash_ip1",
+        "clash_ip2",
         "clash_ip13"
       ],
       "url": "http://www.gstatic.com/generate_204",
@@ -722,6 +724,36 @@
         ]
       }
     },
+    {
+      "tag": "clash_ip2",
+      "type": "tuic",
+      "server": "www2.dtku48.xyz",
+      "server_port": 33993,
+      "uuid": "ebff50f5-dc0e-4bff-bcdb-3c7d2638e817",
+      "password": "dongtaiwang.com",
+      "congestion_control": "bbr",
+      "udp_relay_mode": "native",
+      "heartbeat": "10s",
+      "connect_timeout": "5s",
+      "tcp_fast_open": true,      
+      "udp_over_stream": false,
+      "tcp_multi_path": false,
+      "udp_fragment": false,
+      "domain_strategy": "prefer_ipv4",
+      "fallback_delay": "300ms",
+      "zero_rtt_handshake": false,
+      "auth_timeout": "3s",
+      "tls":
+      {
+        "enabled": true,
+        "insecure": true,
+        "disable_sni": false,
+        #"server_name": "*",
+        "alpn": [
+          "h3"
+        ]
+      }
+    },    
     {
       "tag": "clash_ip13",
       "type": "tuic",
