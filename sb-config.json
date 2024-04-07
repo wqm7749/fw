@@ -69,7 +69,6 @@
       "sniff": true,
       "endpoint_independent_nat": false,
       "stack": "gvisor",
-       # "gvisor",
       "platform":
       {
         "http_proxy":
@@ -632,7 +631,7 @@
         "server_name": "nijigen-works.jp",
         "utls":
         {
-          "enabled": true,
+          "enabled": false,
           "fingerprint": "chrome"
         }
       }
@@ -681,7 +680,7 @@
       "tls":
       {
         "enabled": true,
-         # "server_name": "www2.dtku48.xyz",
+        "server_name": "www2.dtku48.xyz",
         "disable_sni": true,
         "insecure": true,
         "alpn": [
