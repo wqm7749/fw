@@ -85,7 +85,14 @@
         "format": "binary",
         "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-google.srs",
         "download_detour": "direct"
-      },      
+      },
+      {
+        "tag": "geosite-googlefcm",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-googlefcm.srs",
+        "download_detour": "direct"
+      },
       {
         "tag": "geoip-cn",
         "type": "remote",
@@ -119,6 +126,7 @@
           "yacd.haishan.me",
           "testingcf.jsdelivr.net",
           "mirror.ghproxy.com",
+	  "testingcf.jsdelivr.net",
           "d.metacubex.one"
         ],
         "outbound": "direct"
@@ -582,7 +590,7 @@
         "enabled": true,
         "insecure": true,
         "disable_sni": false,
-         #"server_name": "*",
+         "server_name": "*",
         "alpn": [
           "h3"
         ]
@@ -718,40 +726,29 @@
       }
     },
     {
-      "type": "shadowsocks",
       "tag": "sing_ip1",
-      "method": "2022-blake3-chacha20-poly1305", 
-      "password": "cNoeQiREIlGx+U/pFoRG126lD9U1RT1zkXjei2UaT2w=",
-      "detour": "sing_ip1_stls",
-      "multiplex": {
+      "type": "hysteria2",
+      "server": "104.192.224.139", 
+      "server_port":  33440,
+      "password": "dongtaiwang.com",
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tls":
+      {
         "enabled": true,
-        "protocol": "h2mux",
-        "max_connections": 1,
-        "min_streams": 4,
-        "padding": false
-      }
-    },
-    {
-      "type": "shadowtls",
-      "tag": "sing_ip1_stls",
-      "server": "45.150.165.121", 
-      "server_port": 33221,
-      "version": 3, 
-      "password": "lhWGKo/dJHvvMKzuhWX2v1GRIoUOuFb6wCkPLxR2uIk=", 
-      "tls": {
-        "enabled": true,
-        "server_name": "nijigen-works.jp", 
-        "utls": {
-          "enabled": false,
-          "fingerprint": "chrome" 
-        }
+        "server_name": "bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
       }
     },
     {
       "tag": "sing_ip2",
       "type": "hysteria",
       "server": "www.dtku50.xyz",
-      "server_port": 48919,
+      "server_port": 44001,
       "up_mbps": 20,
       "down_mbps": 100,
       "tcp_fast_open": true,
@@ -823,12 +820,12 @@
       "server": "172.83.156.157", 
       "server_port": 44550,
       "version": 3, 
-      "password": "FHDLxKgzbcDCPmijble8uT1gddgBmOxA1XXeDgyqgGc=", 
+      "password": "FHDLxKgzbcDCPmijble8uT1gddgBmOxA1XXeDgyqgGc=",
       "tls": {
         "enabled": true,
         "server_name": "nijigen-works.jp", 
         "utls": {
-          "enabled": true,
+          "enabled": false,
           "fingerprint": "chrome" 
         }
       }
@@ -875,7 +872,7 @@
         "enabled": true,
         "insecure": true,
         "disable_sni": false,
-        #"server_name": "*",
+        "server_name": "*",
         "alpn": [
           "h3"
         ]
@@ -923,7 +920,7 @@
         "enabled": true,
         "insecure": true,
         "disable_sni": true,
-        #"server_name": "*",
+        "server_name": "*",
         "alpn": [
           "h3"
         ]
