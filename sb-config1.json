@@ -44,7 +44,8 @@
       {
         "rule_set": [
         "geosite-android",
-        "geosite-google"
+        "geosite-googlefcm",
+	"geosite-google"
         ],
         "server": "dns_proxy"
       },      
@@ -151,6 +152,7 @@
       {
         "rule_set": [
         "geosite-android",
+	"geosite-googlefcm",
         "geosite-google"
         ],
         "outbound": "proxy"
