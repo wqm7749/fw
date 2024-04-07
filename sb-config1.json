@@ -40,15 +40,15 @@
       {
         "rule_set": "geosite-geolocation-cn",
         "server": "dns_direct"
-      },      
+      },
       {
         "rule_set": [
-        "geosite-android",
-        "geosite-googlefcm",
-	"geosite-google"
+          "geosite-android",
+          "geosite-googlefcm",
+          "geosite-google"
         ],
         "server": "dns_proxy"
-      },      
+      },
       {
         "rule_set": "geosite-geolocation-!cn",
         "server": "dns_proxy"
@@ -58,7 +58,7 @@
   },
   "route":
   {
-    "rule_set": [     
+    "rule_set": [
       {
         "tag": "geosite-geolocation-!cn",
         "type": "remote",
@@ -72,7 +72,7 @@
         "format": "binary",
         "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-cn.srs",
         "download_detour": "direct"
-      }, 
+      },
       {
         "tag": "geosite-android",
         "type": "remote",
@@ -112,14 +112,14 @@
           "stun"
         ],
         "outbound": "block"
-      },      
+      },
       {
         "port": [
           853
         ],
         "network": "udp",
         "outbound": "block"
-      },      
+      },
       {
         "domain": [
           "clash.razord.top",
@@ -127,11 +127,11 @@
           "yacd.haishan.me",
           "testingcf.jsdelivr.net",
           "mirror.ghproxy.com",
-	  "testingcf.jsdelivr.net",
+          "testingcf.jsdelivr.net",
           "d.metacubex.one"
         ],
         "outbound": "direct"
-      },      
+      },
       {
         "domain_suffix": [
           "163.com",
@@ -148,15 +148,15 @@
           "lingtong.com"
         ],
         "outbound": "direct"
-      },      
+      },
       {
         "rule_set": [
-        "geosite-android",
-	"geosite-googlefcm",
-        "geosite-google"
+          "geosite-android",
+          "geosite-googlefcm",
+          "geosite-google"
         ],
         "outbound": "proxy"
-      },      
+      },
       {
         "package_name": [
           "com.google.android.youtube",
@@ -178,7 +178,7 @@
           "com.android.statementservice",
           "com.android.captiveportallogin",
           "com.termux",
-          "com.github.android",       
+          "com.github.android",
           "org.fdroid.fdroid",
           "com.github.metacubex.clash.meta",
           "org.fedorahosted.freeotp",
@@ -221,7 +221,7 @@
           }
         ],
         "outbound": "proxy"
-      }, 
+      },
       {
         "type": "logical",
         "mode": "and",
@@ -234,11 +234,11 @@
           }
         ],
         "outbound": "direct"
-      }, 
+      },
       {
         "rule_set": "geoip-cn",
         "outbound": "direct"
-      },       
+      },
       {
         "ip_is_private": true,
         "outbound": "direct"
@@ -268,7 +268,7 @@
         }
       },
       "sniff_override_destination": false
-    }    
+    }
   ],
   "outbounds": [
     {
@@ -302,7 +302,7 @@
         "clash_ip3",
         "clash_ip6",
         "clash_ip13"
-      ]   
+      ]
     },
     {
       "tag": "auto",
@@ -327,7 +327,7 @@
         "sing_ip1",
         "sing_ip2",
         "sing_ip3",
-        "sing_ip4",        
+        "sing_ip4",
         "clash_ip1",
         "clash_ip2",
         "clash_ip3",
@@ -337,7 +337,7 @@
       "url": "http://www.gstatic.com/generate_204",
       "interval": "5m",
       "tolerance": 50
-    },    
+    },
     {
       "tag": "hy2_ip1",
       "type": "hysteria2",
@@ -592,7 +592,7 @@
         "enabled": true,
         "insecure": true,
         "disable_sni": false,
-         "server_name": "*",
+        "server_name": "*",
         "alpn": [
           "h3"
         ]
@@ -730,8 +730,8 @@
     {
       "tag": "sing_ip1",
       "type": "hysteria2",
-      "server": "104.192.224.139", 
-      "server_port":  33440,
+      "server": "104.192.224.139",
+      "server_port": 33440,
       "password": "dongtaiwang.com",
       "up_mbps": 20,
       "down_mbps": 100,
@@ -775,10 +775,11 @@
     {
       "type": "shadowsocks",
       "tag": "sing_ip3",
-      "method": "2022-blake3-chacha20-poly1305", 
+      "method": "2022-blake3-chacha20-poly1305",
       "password": "6qfEwR4QOrHq+k3csNdEZgMa+Y890g/eouGnVEtxb0c=",
       "detour": "sing_ip3_stls",
-      "multiplex": {
+      "multiplex":
+      {
         "enabled": true,
         "protocol": "h2mux",
         "max_connections": 1,
@@ -789,26 +790,29 @@
     {
       "type": "shadowtls",
       "tag": "sing_ip3_stls",
-      "server": "www2.dtku44.xyz", 
+      "server": "www2.dtku44.xyz",
       "server_port": 443,
-      "version": 3, 
-      "password": "LdjpJtNZK+2WhXfRY+FxR9sokcOYoddKAx8dN7q8FOI=", 
-      "tls": {
+      "version": 3,
+      "password": "LdjpJtNZK+2WhXfRY+FxR9sokcOYoddKAx8dN7q8FOI=",
+      "tls":
+      {
         "enabled": true,
-        "server_name": "nijigen-works.jp", 
-        "utls": {
+        "server_name": "nijigen-works.jp",
+        "utls":
+        {
           "enabled": false,
-          "fingerprint": "chrome" 
+          "fingerprint": "chrome"
         }
       }
     },
     {
       "type": "shadowsocks",
       "tag": "sing_ip4",
-      "method": "2022-blake3-chacha20-poly1305", 
+      "method": "2022-blake3-chacha20-poly1305",
       "password": "5IH4rBauUuOT4VpAshgMPMSQ3Tf+oJjDY/jEDbIel2Q=",
       "detour": "sing_ip4_stls",
-      "multiplex": {
+      "multiplex":
+      {
         "enabled": true,
         "protocol": "h2mux",
         "max_connections": 1,
@@ -819,19 +823,21 @@
     {
       "type": "shadowtls",
       "tag": "sing_ip4_stls",
-      "server": "172.83.156.157", 
+      "server": "172.83.156.157",
       "server_port": 44550,
-      "version": 3, 
+      "version": 3,
       "password": "FHDLxKgzbcDCPmijble8uT1gddgBmOxA1XXeDgyqgGc=",
-      "tls": {
+      "tls":
+      {
         "enabled": true,
-        "server_name": "nijigen-works.jp", 
-        "utls": {
+        "server_name": "nijigen-works.jp",
+        "utls":
+        {
           "enabled": false,
-          "fingerprint": "chrome" 
+          "fingerprint": "chrome"
         }
       }
-    },    
+    },
     {
       "tag": "clash_ip1",
       "type": "hysteria2",
@@ -862,7 +868,7 @@
       "udp_relay_mode": "native",
       "heartbeat": "10s",
       "connect_timeout": "5s",
-      "tcp_fast_open": true,      
+      "tcp_fast_open": true,
       "udp_over_stream": false,
       "tcp_multi_path": false,
       "udp_fragment": false,
@@ -898,7 +904,7 @@
           "h3"
         ]
       }
-    },    
+    },
     {
       "tag": "clash_ip13",
       "type": "tuic",
@@ -910,7 +916,7 @@
       "udp_relay_mode": "native",
       "heartbeat": "10s",
       "connect_timeout": "5s",
-      "tcp_fast_open": true,      
+      "tcp_fast_open": true,
       "udp_over_stream": false,
       "tcp_multi_path": false,
       "udp_fragment": false,
@@ -946,7 +952,7 @@
           "h3"
         ]
       }
-    },    
+    },
     {
       "type": "direct",
       "tag": "direct"
