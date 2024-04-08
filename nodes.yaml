@@ -96,21 +96,21 @@ proxies:
     skip-cert-verify: true 
   - name: hy1-ip1
     type: hysteria
-    server: 167.160.91.115
-    port: 41189
-    auth-str: "bWAwIqINo7XDm1fUlXQGBifVIXoYs1ylgVKqWFKzK1XyDKuwNF"
+    server: 51.159.79.103
+    port: 55396
+    auth-str: "dongtaiwang.com"
     alpn:
       - h3
     protocol: udp
     up: "11 Mbps"
     down: "55 Mbps"
     skip-cert-verify: true 
-    sni: "www.amazon.cn"
+    sni: "youku.com"
   - name: hy1-ip2
     type: hysteria
-    server: 108.181.22.239
-    port: 39967
-    auth-str: "dongtaiwang.com"
+    server: 167.160.91.117
+    port: 14455
+    auth-str: dongtaiwang.com
     alpn:
       - h3
     protocol: udp
@@ -120,28 +120,28 @@ proxies:
     sni: "bing.com" 
   - name: hy1-ip3
     type: hysteria
-    server: 173.234.25.52
-    port: 20164
-    auth-str: "Ljg6NNEATDqP97hdAdHe1lJv7ggtKc0h7zmCCZKCX3qY0LR64F"
+    server: 173.234.25.51
+    port: 48919
+    auth-str: dongtaiwang.com
     alpn:
       - h3
     protocol: udp
     up: "11 Mbps"
     down: "55 Mbps"
     skip-cert-verify: true 
-    sni: "www.microsoft.com" 
+    sni: bing.com 
   - name: hy1-ip4
     type: hysteria
-    server: 51.158.54.46
-    port: 11926
-    auth-str: "Trz2alKwzCImRAXI3nXfpo1ylpHfqOL8s1vageWKoyjjvWeMVs"
+    server: www.dtku40.xyz
+    port: 18091
+    auth-str: dongtaiwang.com
     alpn:
       - h3
     protocol: udp
     up: "11 Mbps"
     down: "55 Mbps"
     skip-cert-verify: true 
-    sni: "youku.com" 
+    sni: bing.com
   - name: hy2-ip1
     type: hysteria2
     server: 108.181.22.155
