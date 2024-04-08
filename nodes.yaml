@@ -61,15 +61,16 @@ proxies:
       password: "q2t9sUj+7N5CztGHJCKvfWbfCRD0qOg2ZEKOb0h7+7k="
       version: 3
   - name: meta-ip4 
-    type: hysteria
-    server: 108.181.22.155
-    port: 19721
-    auth-str: dongtaiwang.com
+    type: hysteria2
+    server: www.dtku40.xyz 
+    port: 22334
+    password: dongtaiwang.com
     alpn:
       - h3
     protocol: udp
     up: "11 Mbps"
     down: "55 Mbps"
+    sni: bing.com
     skip-cert-verify: true 
   - name: meta-ip5 
     server: 104.234.70.41
