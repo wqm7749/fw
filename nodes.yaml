@@ -15,27 +15,30 @@ dns:
     - tls://dns.google:853
 proxies:
   - name: meta-ip1-1 
-    type: hysteria
-    server: 167.160.90.251
-    port: 48089
-    auth-str: dongtaiwang.com
+    type: hysteria2
+    server: 51.159.199.102
+    port: 33491
+    password: dongtaiwang.com
     alpn:
       - h3
     protocol: udp
     up: "11 Mbps"
     down: "55 Mbps"
-    skip-cert-verify: true 
+    skip-cert-verify: true
+    sni: bing.com
   - name: meta-ip1-2 
-    type: hysteria
-    server: 108.181.22.239
-    port: 41146
-    auth-str: dongtaiwang.com
+    type: tuic
+    server: www2.dtku48.xyz
+    port: 33993
+    password: dongtaiwang.com
+    uuid: ebff50f5-dc0e-4bff-bcdb-3c7d2638e817
     alpn:
       - h3
-    protocol: udp
-    up: "11 Mbps"
-    down: "55 Mbps"
-    skip-cert-verify: true   
+    reduce-rtt: true
+    skip-cert-verify: true
+    disable-sni: true
+    udp-relay-mode: native
+    congestion-controller: bbr
   - name: meta-ip2 
     type: hysteria
     server: www.dtku46.xyz
