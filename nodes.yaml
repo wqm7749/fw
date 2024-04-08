@@ -1,4 +1,4 @@
-secret: michael@123
+#secret: michael@123
 mixed-port: 7890
 allow-lan: false
 log-level: info
