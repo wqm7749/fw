@@ -18,14 +18,12 @@ proxies:
     type: hysteria2
     server: 51.159.199.102
     port: 33491
-    password: dongtaiwang.com
+    password: "dongtaiwang.com"
     alpn:
       - h3
-    protocol: udp
-    up: "11 Mbps"
-    down: "55 Mbps"
     skip-cert-verify: true
-    sni: bing.com
+    sni: "bing.com"
+    protocol: udp
   - name: meta-ip1-2 
     type: tuic
     server: www2.dtku48.xyz
@@ -40,27 +38,28 @@ proxies:
     udp-relay-mode: native
     congestion-controller: bbr
   - name: meta-ip2 
-    type: hysteria
-    server: www.dtku46.xyz
-    port: 11223
-    auth-str: mqoE9qSoyMFa
+    type: hysteria2
+    server: 108.181.5.21
+    port: 17644
+    password: dongtaiwang.com
     alpn:
       - h3
     protocol: udp
-    up: "11 Mbps"
-    down: "55 Mbps"
+    up: "20 Mbps"
+    down: "100 Mbps"
+    sni: www.bing.com
     skip-cert-verify: true 
   - name: meta-ip3
-    server: 104.234.70.6
-    type: hysteria
-    port: 16117
-    auth-str: dongtaiwang.com
-    alpn:
-      - h3
-    protocol: udp
-    up: "11 Mbps"
-    down: "55 Mbps"
-    skip-cert-verify: true 
+    type: ss
+    server: www2.dtku48.xyz
+    port: 33001
+    cipher: 2022-blake3-chacha20-poly1305
+    password: "vidC9EcfzKzc/zx9iu8VkKTA0xXTJoWTX/90IvHAHtU="
+    plugin: shadow-tls
+    plugin-opts:
+      host: "nijigen-works.jp"
+      password: "q2t9sUj+7N5CztGHJCKvfWbfCRD0qOg2ZEKOb0h7+7k="
+      version: 3
   - name: meta-ip4 
     type: hysteria
     server: 108.181.22.155
