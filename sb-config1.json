@@ -293,7 +293,7 @@
           "com.reddit.frontpage",
           "com.zhiliaoapp.musically"
         ],
-        "outbound": "proxy"
+        "outbound": "direct"
       },
       {
         "type": "logical",
