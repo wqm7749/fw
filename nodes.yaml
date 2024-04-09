@@ -256,22 +256,22 @@ proxies:
     server: 172.83.156.157
     port: 44550
     cipher: 2022-blake3-chacha20-poly1305
-    password: 5IH4rBauUuOT4VpAshgMPMSQ3Tf+oJjDY/jEDbIel2Q=
+    password: "5IH4rBauUuOT4VpAshgMPMSQ3Tf+oJjDY/jEDbIel2Q="
     plugin: shadow-tls
     plugin-opts:
-      host: nijigen-works.jp
-      password: FHDLxKgzbcDCPmijble8uT1gddgBmOxA1XXeDgyqgGc=
+      host: "nijigen-works.jp"
+      password: "FHDLxKgzbcDCPmijble8uT1gddgBmOxA1XXeDgyqgGc="
       version: 3 
   - name: singbox-ip3
     type: ss
-    server: www2.dtku44.xyz
+    server: "www2.dtku44.xyz"
     port: 443
     cipher: 2022-blake3-chacha20-poly1305
-    password: 6qfEwR4QOrHq+k3csNdEZgMa+Y890g/eouGnVEtxb0c=
+    password: "6qfEwR4QOrHq+k3csNdEZgMa+Y890g/eouGnVEtxb0c="
     plugin: shadow-tls
     plugin-opts:
-      host: nijigen-works.jp
-      password: LdjpJtNZK+2WhXfRY+FxR9sokcOYoddKAx8dN7q8FOI=
+      host: "nijigen-works.jp"
+      password: "LdjpJtNZK+2WhXfRY+FxR9sokcOYoddKAx8dN7q8FOI="
       version: 3        
 proxy-groups:
   - name: 🚀 节点选择
