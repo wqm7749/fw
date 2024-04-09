@@ -38,13 +38,20 @@
         "server": "dns_resolver"
       },
       {
-        "rule_set": "geosite-geolocation-cn",
+        "rule_set": [
+          
+          "geosite-alibaba",
+          "geosite-bytedance",
+          "geosite-jd",
+          "geosite-geolocation-cn"
+          ],
         "server": "dns_direct"
       },
       {
         "rule_set": [
           "geosite-android",
           "geosite-googlefcm",
+          "geosite-bytedance@!cn",
           "geosite-google"
         ],
         "server": "dns_proxy"
@@ -67,7 +74,35 @@
         "download_detour": "direct"
       },
       {
-        "tag": "geosite-geolocation-cn",
+        "tag": "geosite-bytedance",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-bytedance.srs",  
+        "download_detour": "direct"
+      }, 
+      {
+        "tag": "geosite-bytedance@!cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-bytedance@!cn.srs",  
+        "download_detour": "direct"
+      },       
+      {
+        "tag": "geosite-alibaba",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-alibaba.srs",  
+        "download_detour": "direct"
+      }, 
+      {
+        "tag": "geosite-jd",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-jd.srs",  
+        "download_detour": "direct"
+      },       
+      {
+        "tag": "geosite-geolocation-cn", 
         "type": "remote",
         "format": "binary",
         "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-cn.srs",
@@ -77,7 +112,7 @@
         "tag": "geosite-android",
         "type": "remote",
         "format": "binary",
-        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-android.srs",
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-android.srs",  
         "download_detour": "direct"
       },
       {
@@ -221,6 +256,23 @@
           }
         ],
         "outbound": "proxy"
+      },
+      {
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "rule_set": "geoip-cn"
+          },
+          {
+            "rule_set": [
+              "geosite-alibaba",
+              "geosite-jd",
+              "geosite-bytedance"
+            ]
+          }
+        ],
+        "outbound": "direct"
       },
       {
         "type": "logical",
