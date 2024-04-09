@@ -185,6 +185,37 @@
         "outbound": "direct"
       },
       {
+	 "package_name": [
+	   "com.tencent.qqlivehuawei",
+	   "com.ss.android.article.lite",
+	   "com.icbc",
+	   "com.chinamworld.bocmbci",
+	   "com.tencent.wemeet.app",
+	   "com.tencent.mm",
+	   "com.baidu.input_huawei",
+	   "com.zerotier.one",
+	   "com.jingdong.app.mall",
+	   "com.tmall.wireless",
+	   "com.alibaba.android.rimet",
+	   "com.taobao.taobao",
+	   "com.eg.android.AlipayGphone",
+	   "com.csg.elink",
+	   "com.greenpoint.android.mc10086.activity",
+	   "com.tencent.wework",
+	   "com.tmri.app.main",
+	   "com.alibaba.android.rimet",
+	   "cn.gov.tax.its",
+	   "me.ele",
+	   "com.sankuai.meituan",
+	   "cn.gov.pbc.dcep",
+	   "com.MobileTicket",
+	   "com.moutai.mall",
+	   "com.autonavi.minimap",
+	   "com.huawei.contacts.sync"
+	 ],
+	 "outbound": "direct"
+      },
+      {
         "rule_set": [
           "geosite-android",
           "geosite-googlefcm",
