@@ -937,15 +937,15 @@
     {
       "tag": "clash_ip6",
       "type": "hysteria2",
-      "server": "www.dtku40.xyz",
-      "server_port": 22334,
+      "server": "108.181.5.21",
+      "server_port": 17644,
       "password": "dongtaiwang.com",
       "up_mbps": 20,
       "down_mbps": 100,
       "tls":
       {
         "enabled": true,
-        "server_name": "bing.com",
+        "server_name": "www.bing.com",
         "disable_sni": false,
         "insecure": true,
         "alpn": [
