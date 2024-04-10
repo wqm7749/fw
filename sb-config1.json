@@ -44,7 +44,7 @@
           "geosite-bytedance",
           "geosite-jd",
           "geosite-geolocation-cn"
-          ],
+        ],
         "server": "dns_direct"
       },
       {
@@ -77,32 +77,32 @@
         "tag": "geosite-bytedance",
         "type": "remote",
         "format": "binary",
-        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-bytedance.srs",  
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-bytedance.srs",
         "download_detour": "direct"
-      }, 
+      },
       {
         "tag": "geosite-bytedance@!cn",
         "type": "remote",
         "format": "binary",
-        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-bytedance@!cn.srs",  
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-bytedance@!cn.srs",
         "download_detour": "direct"
-      },       
+      },
       {
         "tag": "geosite-alibaba",
         "type": "remote",
         "format": "binary",
-        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-alibaba.srs",  
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-alibaba.srs",
         "download_detour": "direct"
-      }, 
+      },
       {
         "tag": "geosite-jd",
         "type": "remote",
         "format": "binary",
-        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-jd.srs",  
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-jd.srs",
         "download_detour": "direct"
-      },       
+      },
       {
-        "tag": "geosite-geolocation-cn", 
+        "tag": "geosite-geolocation-cn",
         "type": "remote",
         "format": "binary",
         "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-cn.srs",
@@ -112,7 +112,7 @@
         "tag": "geosite-android",
         "type": "remote",
         "format": "binary",
-        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-android.srs",  
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-android.srs",
         "download_detour": "direct"
       },
       {
@@ -185,37 +185,6 @@
         "outbound": "direct"
       },
       {
-	 "package_name": [
-	   "com.tencent.qqlivehuawei",
-	   "com.ss.android.article.lite",
-	   "com.icbc",
-	   "com.chinamworld.bocmbci",
-	   "com.tencent.wemeet.app",
-	   "com.tencent.mm",
-	   "com.baidu.input_huawei",
-	   "com.zerotier.one",
-	   "com.jingdong.app.mall",
-	   "com.tmall.wireless",
-	   "com.alibaba.android.rimet",
-	   "com.taobao.taobao",
-	   "com.eg.android.AlipayGphone",
-	   "com.csg.elink",
-	   "com.greenpoint.android.mc10086.activity",
-	   "com.tencent.wework",
-	   "com.tmri.app.main",
-	   "com.alibaba.android.rimet",
-	   "cn.gov.tax.its",
-	   "me.ele",
-	   "com.sankuai.meituan",
-	   "cn.gov.pbc.dcep",
-	   "com.MobileTicket",
-	   "com.moutai.mall",
-	   "com.autonavi.minimap",
-	   "com.huawei.contacts.sync"
-	 ],
-	 "outbound": "direct"
-      },
-      {
         "rule_set": [
           "geosite-android",
           "geosite-googlefcm",
@@ -243,6 +212,7 @@
           "com.android.pacprocessor",
           "com.android.statementservice",
           "com.android.captiveportallogin",
+          "com.azure.authenticator",
           "com.termux",
           "com.github.android",
           "org.fdroid.fdroid",
@@ -328,6 +298,7 @@
       }
     ],
     "final": "proxy",
+    "override_android_vpn": true,
     "auto_detect_interface": true
   },
   "inbounds": [
@@ -350,6 +321,69 @@
           "server_port": 2080
         }
       },
+      "exclude_package": [
+        "com.tencent.qqlivehuawei",
+        "com.ss.android.article.lite",
+        "com.icbc",
+        "com.huawei.lbs",
+        "com.huawei.ims",
+        "com.huawei.hff",
+        "com.huawei.aod",
+        "com.huawei.email",
+        "com.huawei.hiai",
+        "com.huawei.tips",
+        "com.huawei.msdp",
+        "com.huawei.hiskytone",
+        "com.huawei.fastapp",
+        "com.huawei.ca",
+        "com.huawei.bd",
+        "com.huawei.trustcircle",
+        "com.huawei.photos",
+        "com.huawei.search",
+        "com.huawei.suggestion",
+        "com.huawei.secime",
+        "com.huawei.hwvoipservice",
+        "com.huawei.hwdetectrepair",
+        "com.huawei.game.kitserver",
+        "com.huawei.mmitest",
+        "com.huawei.notepad",
+        "com.huawei.wallet",
+        "com.huawei.assetsyncservice",
+        "com.huawei.assetsync",
+        "com.huawei.rcsserviceapplication",
+        "com.huawei.deskclock",
+        "com.huawei.gameassistant",
+        "com.huawei.android.airsharing",
+        "com.huawei.android.karaoke",
+        "com.huawei.android.wfdft",
+        "com.chinamworld.bocmbci",
+        "com.chinamworld.main",
+        "com.tencent.wemeet.app",
+        "com.tencent.mm",
+        "com.baidu.input_huawei",
+        "com.zerotier.one",
+        "com.jingdong.app.mall",
+        "com.tmall.wireless",
+        "com.alibaba.android.rimet",
+        "com.taobao.taobao",
+        "com.eg.android.AlipayGphone",
+        "com.csg.elink",
+        "com.greenpoint.android.mc10086.activity",
+        "com.tencent.wework",
+        "com.tmri.app.main",
+        "com.alibaba.android.rimet",
+        "cn.gov.tax.its",
+        "me.ele",
+        "com.csair.mbp",
+        "com.sankuai.meituan",
+        "cn.gov.pbc.dcep",
+        "com.MobileTicket",
+        "com.moutai.mall",
+        "com.hpbr.bosszhipin",
+        "com.autonavi.minimap",
+        "com.lizongying.mytv",
+        "com.huawei.contacts.sync"
+      ],
       "sniff_override_destination": false
     }
   ],
