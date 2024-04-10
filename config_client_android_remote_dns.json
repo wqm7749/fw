@@ -215,7 +215,7 @@
           "com.quora.android",
           "com.android.vending",
           "com.android.printservice.recommendation",
-          "pl.rs.sip.softphone ",
+          "pl.rs.sip.softphone",
           "com.estrongs.android.pop",
           "com.android.chrome",
           "com.android.managedprovisioning",
@@ -250,7 +250,6 @@
         ],
         "outbound": "proxy"
       },
-
       {
         "type": "logical",
         "mode": "and",
