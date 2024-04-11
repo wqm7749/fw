@@ -106,7 +106,14 @@
         "tag": "geosite-geolocation-cn",
         "type": "remote",
         "format": "binary",
-        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-cn.srs",
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-cn.srs", 
+        "download_detour": "direct"
+      },
+      {
+        "tag": "geosite-greatfire",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-greatfire.srs",
         "download_detour": "direct"
       },
       {
@@ -115,7 +122,7 @@
         "format": "binary",
         "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-google@cn.srs",
         "download_detour": "direct"
-      },      
+      },       
       {
         "tag": "geosite-android",
         "type": "remote",
@@ -193,15 +200,6 @@
         "outbound": "direct"
       },
       {
-        "rule_set": [
-          "geosite-google-cn",
-          "geosite-android",
-          "geosite-googlefcm",
-          "geosite-google"
-        ],
-        "outbound": "proxy"
-      },
-      {
         "package_name": [
           "com.google.android.youtube",
           "com.google.android.googlequicksearchbox",
@@ -253,6 +251,16 @@
         ],
         "outbound": "proxy"
       },
+      {
+        "rule_set": [
+          "geosite-google-cn",
+          "geosite-greatfire",
+          "geosite-android",
+          "geosite-googlefcm",
+          "geosite-google"
+        ],
+        "outbound": "proxy"
+      },      
       {
         "type": "logical",
         "mode": "and",
