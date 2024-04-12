@@ -5,36 +5,21 @@
     "level": "debug",
     "timestamp": true
   },
-  "experimental":
-  {
-    "clash_api":
-    {
-      "external_controller": "127.0.0.1:9090",
-      "external_ui": "ui",
-      "secret": "Michael",
-      "default_mode": "rule"
-    },
-    "cache_file":
-    {
-      "enabled": true,
-      "store_fakeip": false
-    }
-  },
   "dns":
   {
     "servers": [
       {
         "tag": "dns_proxy",
-        "address": "https://dns.google/dns-query",
+        "address": "https://1.1.1.1/dns-query",
         "address_resolver": "dns_resolver",
-        "strategy": "ipv4_only",
+        "strategy": "prefer_ipv4",
         "detour": "proxy"
       },
       {
         "tag": "dns_direct",
         "address": "https://dns.alidns.com/dns-query",
         "address_resolver": "dns_resolver",
-        "strategy": "ipv4_only",
+        "strategy": "prefer_ipv4",
         "detour": "direct"
       },
       {
@@ -53,22 +38,297 @@
         "server": "dns_resolver"
       },
       {
+        "rule_set": [
+          "geosite-google-cn",
+          "geosite-android",
+          "geosite-googlefcm",
+          "geosite-bytedance@!cn",
+          "geosite-google"
+        ],
+        "server": "dns_proxy"
+      },
+      {
+        "rule_set": [
+          
+          "geosite-alibaba",
+          "geosite-bytedance",
+          "geosite-jd",
+          "geosite-geolocation-cn"
+        ],
+        "server": "dns_direct"
+      },
+      {
         "rule_set": "geosite-geolocation-!cn",
         "server": "dns_proxy"
       }
     ],
-    "final": "dns_direct"
+    "final": "dns_proxy"
+  },
+  "route":
+  {
+    "rule_set": [
+      {
+        "tag": "geosite-geolocation-!cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-!cn.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "geosite-bytedance",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-bytedance.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "geosite-bytedance@!cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-bytedance@!cn.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "geosite-alibaba",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-alibaba.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "geosite-jd",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-jd.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "geosite-geolocation-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-cn.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "geosite-greatfire",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-greatfire.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "geosite-google-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-google@cn.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "geosite-android",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-android.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "geosite-google",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-google.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "geosite-googlefcm",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-googlefcm.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "geoip-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
+        "download_detour": "direct"
+      }
+    ],
+    "rules": [
+      {
+        "protocol": "dns",
+        "outbound": "dns-out"
+      },
+      {
+        "protocol": [
+          "stun"
+        ],
+        "outbound": "block"
+      },
+      {
+        "port": [
+          853
+        ],
+        "network": "udp",
+        "outbound": "block"
+      },
+      {
+        "domain": [
+          "clash.razord.top",
+          "yacd.metacubex.one",
+          "yacd.haishan.me",
+          "testingcf.jsdelivr.net",
+          "mirror.ghproxy.com",
+          "testingcf.jsdelivr.net",
+          "d.metacubex.one"
+        ],
+        "outbound": "direct"
+      },
+      {
+        "domain_suffix": [
+          "163.com",
+          "eu.org",
+          "51cto.com",
+          "csdn.net",
+          "qq.com",
+          "pa18.com",
+          "pingan.com",
+          "ghproxy.com",
+          "mirror.ghproxy.com",
+          "jsdelivr.net",
+          "testingcf.jsdelivr.net",
+          "lingtong.com"
+        ],
+        "outbound": "direct"
+      },
+      {
+        "package_name": [
+          "com.google.android.youtube",
+          "com.google.android.googlequicksearchbox",
+          "com.google.android.marvin.talkback",
+          "com.google.android.apps.maps",
+          "com.google.android.webview",
+          "com.google.android.syncadapters.contacts",
+          "com.google.android.gms",
+          "com.google.android.gsf",
+          "com.google.android.gsf.login",
+          "com.google.android.gms.policy_sidecar_aps",
+          "com.google.android.apps.translate",
+          "com.google.android.apps.maps",
+          "vtechnotm.com.deviceid",
+          "com.lzplay.helper",
+          "com.instagram.android",
+          "com.android.pacprocessor",
+          "com.android.statementservice",
+          "com.android.captiveportallogin",
+          "com.azure.authenticator",
+          "com.termux",
+          "com.github.android",
+          "org.fdroid.fdroid",
+          "com.github.metacubex.clash.meta",
+          "org.fedorahosted.freeotp",
+          "com.android.proxyhandler",
+          "org.telegram.messenger",
+          "com.adobe.reader",
+          "com.github.libretube",
+          "moe.nb4a",
+          "com.twitter.android",
+          "com.vitalsource.bookshelf",
+          "com.quora.android",
+          "com.android.vending",
+          "com.android.printservice.recommendation",
+          "pl.rs.sip.softphone",
+          "com.estrongs.android.pop",
+          "com.android.chrome",
+          "com.android.managedprovisioning",
+          "com.facebook.lite",
+          "com.openai.chatgpt",
+          "video.player.videoplayer",
+          "com.v2ray.ang",
+          "com.android.settings",
+          "com.paypal.android.p2pmobile",
+          "sudoku.puzzle.free.game.brain",
+          "com.reddit.frontpage",
+          "com.zhiliaoapp.musically"
+        ],
+        "outbound": "proxy"
+      },
+      {
+        "rule_set": [
+          "geosite-google-cn",
+          "geosite-greatfire",
+          "geosite-android",
+          "geosite-googlefcm",
+          "geosite-google"
+        ],
+        "outbound": "proxy"
+      },
+      {
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "rule_set": "geoip-cn",
+            "invert": true
+          },
+          {
+            "rule_set": "geosite-geolocation-!cn"
+          }
+        ],
+        "outbound": "proxy"
+      },
+      {
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "rule_set": "geoip-cn"
+          },
+          {
+            "rule_set": [
+              "geosite-alibaba",
+              "geosite-jd",
+              "geosite-bytedance"
+            ]
+          }
+        ],
+        "outbound": "direct"
+      },
+      {
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "rule_set": "geoip-cn"
+          },
+          {
+            "rule_set": "geosite-geolocation-cn"
+          }
+        ],
+        "outbound": "direct"
+      },
+      {
+        "rule_set": "geoip-cn",
+        "outbound": "direct"
+      },
+      {
+        "ip_is_private": true,
+        "outbound": "direct"
+      }
+    ],
+    "final": "auto",
+    "override_android_vpn": true,
+    "auto_detect_interface": true
   },
   "inbounds": [
     {
       "type": "tun",
-      "inet4_address": "172.19.0.1/30",
+      "tag": "tun-in",
+      "inet4_address": "172.16.0.1/30",
+      "inet6_address": "fd00::1/126",
       "mtu": 1400,
       "auto_route": true,
       "strict_route": true,
-      "sniff": true,
-      "endpoint_independent_nat": false,
       "stack": "gvisor",
+      "sniff": true,
       "platform":
       {
         "http_proxy":
@@ -77,7 +337,56 @@
           "server": "127.0.0.1",
           "server_port": 2080
         }
-      }
+      },
+      "include_package": [
+        "com.google.android.youtube",
+        "com.google.android.googlequicksearchbox",
+        "com.google.android.marvin.talkback",
+        "com.google.android.apps.maps",
+        "com.google.android.webview",
+        "com.android.chrome",
+        "com.google.android.syncadapters.contacts",
+        "com.google.android.gms",
+        "com.google.android.gsf",
+        "com.google.android.gsf.login",
+        "com.google.android.gms.policy_sidecar_aps",
+        "com.google.android.apps.translate",
+        "com.google.android.apps.maps",
+        "vtechnotm.com.deviceid",
+        "com.lzplay.helper",
+        "com.instagram.android",
+        "com.android.pacprocessor",
+        "com.android.statementservice",
+        "com.android.captiveportallogin",
+        "com.termux",
+        "com.github.android",
+        "org.fdroid.fdroid",
+        "com.github.metacubex.clash.meta",
+        "org.fedorahosted.freeotp",
+        "com.android.proxyhandler",
+        "org.telegram.messenger",
+        "com.adobe.reader",
+        "com.github.libretube",
+        "moe.nb4a",
+        "com.twitter.android",
+        "com.vitalsource.bookshelf",
+        "com.quora.android",
+        "com.android.vending",
+        "com.android.printservice.recommendation",
+        "pl.rs.sip.softphone ",
+        "com.estrongs.android.pop",
+        "com.android.chrome",
+        "com.android.managedprovisioning",
+        "com.facebook.lite",
+        "com.openai.chatgpt",
+        "video.player.videoplayer",
+        "com.v2ray.ang",
+        "com.android.settings",
+        "com.paypal.android.p2pmobile",
+        "sudoku.puzzle.free.game.brain",
+        "com.reddit.frontpage",
+        "com.zhiliaoapp.musically"
+      ]
     }
   ],
   "outbounds": [
@@ -91,10 +400,14 @@
         "hy2_ip13",
         "hy2_ip2",
         "hy2_ip4",
+        "hy2_ip5",
         "hy1_ip1",
         "hy1_ip13",
         "hy1_ip2",
         "hy1_ip4",
+        "hy1_ip5",
+        "hy1_ip6",
+        "hy1_ip7",
         "quick_ip1",
         "quick_ip2",
         "quick_ip3",
@@ -103,266 +416,18 @@
         "xray_ip2",
         "xray_ip3",
         "xray_ip4",
+        "sing_ip1",
+        "sing_ip2",
+        "sing_ip3",
+        "sing_ip4",
         "clash_ip1",
+        "clash_ip2",
+        "clash_ip3",
+        "clash_ip3-1",
+        "clash_ip4",
+        "clash_ip5",
+        "clash_ip6",
         "clash_ip13"
-      ]
-    },
-    {
-      "tag": "🤖 OpenAI",
-      "type": "selector",
-      "outbounds": [
-        "🇹🇼 台湾节点",
-        "🇸🇬 狮城节点",
-        "🇯🇵 日本节点",
-        "🇺🇸 美国节点",
-        "✈️ 其他节点"
-      ],
-      "default": "🇺🇸 美国节点"
-    },
-    {
-      "tag": "🌌 Google",
-      "type": "selector",
-      "outbounds": [
-        "🇭🇰 香港节点",
-        "🇹🇼 台湾节点",
-        "🇸🇬 狮城节点",
-        "🇯🇵 日本节点",
-        "🇺🇸 美国节点",
-        "✈️ 其他节点"
-      ]
-    },
-    {
-      "tag": "📟 Telegram",
-      "type": "selector",
-      "outbounds": [
-        "🇭🇰 香港节点",
-        "🇹🇼 台湾节点",
-        "🇸🇬 狮城节点",
-        "🇯🇵 日本节点",
-        "🇺🇸 美国节点",
-        "✈️ 其他节点"
-      ]
-    },
-    {
-      "tag": "🐦 Twitter",
-      "type": "selector",
-      "outbounds": [
-        "🇭🇰 香港节点",
-        "🇹🇼 台湾节点",
-        "🇸🇬 狮城节点",
-        "🇯🇵 日本节点",
-        "🇺🇸 美国节点",
-        "✈️ 其他节点"
-      ]
-    },
-    {
-      "tag": "👤 Facebook",
-      "type": "selector",
-      "outbounds": [
-        "🇭🇰 香港节点",
-        "🇹🇼 台湾节点",
-        "🇸🇬 狮城节点",
-        "🇯🇵 日本节点",
-        "🇺🇸 美国节点",
-        "✈️ 其他节点"
-      ]
-    },
-    {
-      "tag": "🛍️ Amazon",
-      "type": "selector",
-      "outbounds": [
-        "direct",
-        "🇭🇰 香港节点",
-        "🇹🇼 台湾节点",
-        "🇸🇬 狮城节点",
-        "🇯🇵 日本节点",
-        "🇺🇸 美国节点",
-        "✈️ 其他节点"
-      ]
-    },
-    {
-      "tag": "🍎 Apple",
-      "type": "selector",
-      "outbounds": [
-        "direct",
-        "🇭🇰 香港节点",
-        "🇹🇼 台湾节点",
-        "🇸🇬 狮城节点",
-        "🇯🇵 日本节点",
-        "🇺🇸 美国节点",
-        "✈️ 其他节点"
-      ]
-    },
-    {
-      "tag": "🧩 Microsoft",
-      "type": "selector",
-      "outbounds": [
-        "direct",
-        "🇭🇰 香港节点",
-        "🇹🇼 台湾节点",
-        "🇸🇬 狮城节点",
-        "🇯🇵 日本节点",
-        "🇺🇸 美国节点",
-        "✈️ 其他节点"
-      ]
-    },
-    {
-      "tag": "🎮 Game",
-      "type": "selector",
-      "outbounds": [
-        "direct",
-        "🇭🇰 香港节点",
-        "🇹🇼 台湾节点",
-        "🇸🇬 狮城节点",
-        "🇯🇵 日本节点",
-        "🇺🇸 美国节点",
-        "✈️ 其他节点"
-      ]
-    },
-    {
-      "tag": "📺 Bilibili",
-      "type": "selector",
-      "outbounds": [
-        "direct",
-        "🇭🇰 香港节点",
-        "🇹🇼 台湾节点"
-      ]
-    },
-    {
-      "tag": "🎬 MediaVideo",
-      "type": "selector",
-      "outbounds": [
-        "🇭🇰 香港节点",
-        "🇹🇼 台湾节点",
-        "🇸🇬 狮城节点",
-        "🇯🇵 日本节点",
-        "🇺🇸 美国节点",
-        "✈️ 其他节点"
-      ]
-    },
-    {
-      "tag": "🌏 !cn",
-      "type": "selector",
-      "outbounds": [
-        "🇭🇰 香港节点",
-        "🇹🇼 台湾节点",
-        "🇸🇬 狮城节点",
-        "🇯🇵 日本节点",
-        "🇺🇸 美国节点",
-        "✈️ 其他节点",
-        "direct"
-      ]
-    },
-    {
-      "tag": "🇭🇰 香港节点",
-      "type": "selector",
-      "outbounds": [
-        "hy2_ip1",
-        "hy2_ip13",
-        "hy2_ip2",
-        "hy2_ip4",
-        "hy1_ip1",
-        "hy1_ip13",
-        "hy1_ip2",
-        "hy1_ip4",
-        "quick_ip1",
-        "quick_ip2",
-        "quick_ip3",
-        "quick_ip4",
-        "xray_ip1",
-        "xray_ip2",
-        "xray_ip3",
-        "xray_ip4",
-        "clash_ip1",
-        "clash_ip13",
-        "proxy"
-      ]
-    },
-    {
-      "tag": "🇹🇼 台湾节点",
-      "type": "selector",
-      "outbounds": [
-        "proxy"
-      ]
-    },
-    {
-      "tag": "🇸🇬 狮城节点",
-      "type": "selector",
-      "outbounds": [
-        "proxy"
-      ]
-    },
-    {
-      "tag": "🇯🇵 日本节点",
-      "type": "selector",
-      "outbounds": [
-        "proxy"
-      ]
-    },
-    {
-      "tag": "🇺🇸 美国节点",
-      "type": "selector",
-      "outbounds": [
-        "hy2_ip1",
-        "hy2_ip13",
-        "hy2_ip2",
-        "hy2_ip4",
-        "hy1_ip1",
-        "hy1_ip13",
-        "hy1_ip2",
-        "hy1_ip4",
-        "quick_ip1",
-        "quick_ip2",
-        "quick_ip3",
-        "quick_ip4",
-        "xray_ip1",
-        "xray_ip2",
-        "xray_ip3",
-        "xray_ip4",
-        "clash_ip1",
-        "clash_ip13",
-        "proxy"
-      ]
-    },
-    {
-      "tag": "✈️ 其他节点",
-      "type": "selector",
-      "outbounds": [
-        "hy2_ip1",
-        "hy2_ip13",
-        "hy2_ip2",
-        "hy2_ip4",
-        "hy1_ip1",
-        "hy1_ip13",
-        "hy1_ip2",
-        "hy1_ip4",
-        "quick_ip1",
-        "quick_ip2",
-        "quick_ip3",
-        "quick_ip4",
-        "xray_ip1",
-        "xray_ip2",
-        "xray_ip3",
-        "xray_ip4",
-        "clash_ip1",
-        "clash_ip13",
-        "proxy"
-      ]
-    },
-    {
-      "tag": "🌏 cn",
-      "type": "selector",
-      "outbounds": [
-        "direct",
-        "proxy"
-      ]
-    },
-    {
-      "tag": "🛑 AdBlock",
-      "type": "selector",
-      "outbounds": [
-        "block",
-        "direct"
       ]
     },
     {
@@ -373,10 +438,14 @@
         "hy2_ip13",
         "hy2_ip2",
         "hy2_ip4",
+        "hy2_ip5",
         "hy1_ip1",
         "hy1_ip13",
         "hy1_ip2",
         "hy1_ip4",
+        "hy1_ip5",
+        "hy1_ip6",
+        "hy1_ip7",
         "quick_ip1",
         "quick_ip2",
         "quick_ip3",
@@ -385,30 +454,28 @@
         "xray_ip2",
         "xray_ip3",
         "xray_ip4",
+        "sing_ip1",
+        "sing_ip2",
+        "sing_ip3",
+        "sing_ip4",
         "clash_ip1",
+        "clash_ip2",
+        "clash_ip3",
+        "clash_ip3-1",
+        "clash_ip4",
+        "clash_ip5",
+        "clash_ip6",
         "clash_ip13"
       ],
-      "url": "http://www.gstatic.com/generate_204",
+      "url": "https://www.gstatic.com/generate_204",
       "interval": "5m",
       "tolerance": 50
-    },
-    {
-      "type": "direct",
-      "tag": "direct"
-    },
-    {
-      "type": "dns",
-      "tag": "dns-out"
-    },
-    {
-      "type": "block",
-      "tag": "block"
     },
     {
       "tag": "hy2_ip1",
       "type": "hysteria2",
       "server": "64.110.25.11",
-      "server_port": 33337,
+      "server_port": 37021,
       "password": "dongtaiwang.com",
       "up_mbps": 20,
       "down_mbps": 100,
@@ -427,7 +494,7 @@
       "tag": "hy2_ip13",
       "type": "hysteria2",
       "server": "51.159.77.198",
-      "server_port": 53967,
+      "server_port": 20261,
       "password": "dongtaiwang.com",
       "up_mbps": 20,
       "down_mbps": 100,
@@ -464,8 +531,27 @@
     {
       "tag": "hy2_ip4",
       "type": "hysteria2",
-      "server": "62.210.103.0",
-      "server_port": 22483,
+      "server": "109.104.152.194",
+      "server_port": 20352,
+      "password": "dongtaiwang.com",
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "www.bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "hy2_ip5",
+      "type": "hysteria2",
+      "server": "104.192.224.141",
+      "server_port": 40391,
       "password": "dongtaiwang.com",
       "up_mbps": 20,
       "down_mbps": 100,
@@ -483,7 +569,7 @@
     {
       "tag": "hy1_ip1",
       "type": "hysteria",
-      "server": "51.158.54.46",
+      "server": "51.159.79.103",
       "server_port": 55396,
       "up_mbps": 20,
       "down_mbps": 100,
@@ -509,7 +595,7 @@
     {
       "tag": "hy1_ip13",
       "type": "hysteria",
-      "server": "173.234.25.52",
+      "server": "173.234.25.51",
       "server_port": 48919,
       "up_mbps": 20,
       "down_mbps": 100,
@@ -535,8 +621,8 @@
     {
       "tag": "hy1_ip2",
       "type": "hysteria",
-      "server": "www.dtku40.xyz",
-      "server_port": 18490,
+      "server": "167.160.91.117",
+      "server_port": 14455,
       "up_mbps": 20,
       "down_mbps": 100,
       "tcp_fast_open": true,
@@ -561,8 +647,8 @@
     {
       "tag": "hy1_ip4",
       "type": "hysteria",
-      "server": "167.160.91.115",
-      "server_port": 41189,
+      "server": "www.dtku40.xyz",
+      "server_port": 18091,
       "up_mbps": 20,
       "down_mbps": 100,
       "tcp_fast_open": true,
@@ -572,11 +658,87 @@
       "recv_window_conn": 0,
       "recv_window": 0,
       "disable_mtu_discovery": false,
-      "auth_str": "bWAwIqINo7XDm1fUlXQGBifVIXoYs1ylgVKqWFKzK1XyDKuwNF",
+      "auth_str": "dongtaiwang.com",
       "tls":
       {
         "enabled": true,
-        "server_name": "www.amazon.cn",
+        "server_name": "bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "hy1_ip5",
+      "type": "hysteria",
+      "server": "62.210.243.131",
+      "server_port": 18702,
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tcp_fast_open": true,
+      "connect_timeout": "5s",
+      "domain_strategy": "prefer_ipv4",
+      "fallback_delay": "300ms",
+      "recv_window_conn": 0,
+      "recv_window": 0,
+      "disable_mtu_discovery": false,
+      "auth_str": "dongtaiwang.com",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "hy1_ip6",
+      "type": "hysteria",
+      "server": "109.104.152.194",
+      "server_port": 58510,
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tcp_fast_open": true,
+      "connect_timeout": "5s",
+      "fallback_delay": "300ms",
+      "recv_window_conn": 0,
+      "recv_window": 0,
+      "disable_mtu_discovery": false,
+      "auth_str": "dongtaiwang.com",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "hy1_ip7",
+      "type": "hysteria",
+      "server": "108.181.5.133",
+      "server_port": 26022,
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tcp_fast_open": true,
+      "connect_timeout": "5s",
+      "fallback_delay": "300ms",
+      "recv_window_conn": 0,
+      "recv_window": 0,
+      "disable_mtu_discovery": false,
+      "auth_str": "dongtaiwang.com",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "bing.com",
         "disable_sni": false,
         "insecure": true,
         "alpn": [
@@ -587,8 +749,8 @@
     {
       "tag": "quick_ip1",
       "type": "hysteria2",
-      "server": "51.159.77.153",
-      "server_port": 33390,
+      "server": "www2.dtku48.xyz",
+      "server_port": 48726,
       "password": "dongtaiwang.com",
       "up_mbps": 20,
       "down_mbps": 100,
@@ -607,8 +769,8 @@
       "type": "shadowsocks",
       "tag": "quick_ip2",
       "method": "2022-blake3-chacha20-poly1305",
-      "password": "5IH4rBauUuOT4VpAshgMPMSQ3Tf+oJjDY/jEDbIel2Q="
-      "detour": "stl-6243",
+      "password": "cNoeQiREIlGx+U/pFoRG126lD9U1RT1zkXjei2UaT2w=",
+      "detour": "quick_ip2_stls",
       "multiplex":
       {
         "enabled": true,
@@ -620,11 +782,11 @@
     },
     {
       "type": "shadowtls",
-      "tag": "stl-6243",
+      "tag": "quick_ip2_stls",
       "server": "62.204.54.81",
-      "server_port": 44550,
+      "server_port": 33221,
       "version": 3,
-      "password": "FHDLxKgzbcDCPmijble8uT1gddgBmOxA1XXeDgyqgGc=",
+      "password": "lhWGKo/dJHvvMKzuhWX2v1GRIoUOuFb6wCkPLxR2uIk=",
       "tls":
       {
         "enabled": true,
@@ -638,25 +800,27 @@
     },
     {
       "tag": "quick_ip3",
-      "type": "hysteria",
+      "type": "tuic",
       "server": "www.dtku50.xyz",
-      "server_port": 18470,
-      "up_mbps": 20,
-      "down_mbps": 100,
-      "tcp_fast_open": true,
+      "server_port": 22335,
+      "uuid": "ef634e71-99e1-4a08-ac38-a3a5d1db4188",
+      "password": "dongtaiwang.com",
+      "congestion_control": "bbr",
+      "udp_relay_mode": "native",
+      "heartbeat": "10s",
       "connect_timeout": "5s",
-      "domain_strategy": "prefer_ipv4",
+      "tcp_fast_open": true,
+      "udp_over_stream": false,
+      "tcp_multi_path": false,
+      "udp_fragment": false,
       "fallback_delay": "300ms",
-      "recv_window_conn": 0,
-      "recv_window": 0,
-      "disable_mtu_discovery": false,
-      "auth_str": "dongtaiwang.com",
+      "zero_rtt_handshake": false,
       "tls":
       {
         "enabled": true,
-        "server_name": "www.amazon.cn",
-        "disable_sni": false,
         "insecure": true,
+        "disable_sni": false,
+        "server_name": "*",
         "alpn": [
           "h3"
         ]
@@ -664,24 +828,17 @@
     },
     {
       "tag": "quick_ip4",
-      "type": "hysteria",
-      "server": "www2.dtku48.xyz",
-      "server_port": 22334,
+      "type": "hysteria2",
+      "server": "51.159.77.153",
+      "server_port": 33390,
+      "password": "dongtaiwang.com",
       "up_mbps": 20,
       "down_mbps": 100,
-      "tcp_fast_open": true,
-      "connect_timeout": "5s",
-      "domain_strategy": "prefer_ipv4",
-      "fallback_delay": "300ms",
-      "recv_window_conn": 0,
-      "recv_window": 0,
-      "disable_mtu_discovery": false,
-      "auth_str": "dongtaiwang.com",
       "tls":
       {
         "enabled": true,
-        "server_name": "www2.dtku48.xyz",
-        "disable_sni": true,
+        "server_name": "bing.com",
+        "disable_sni": false,
         "insecure": true,
         "alpn": [
           "h3"
@@ -710,7 +867,7 @@
     {
       "tag": "xray_ip2",
       "type": "vless",
-      "server": "yh1.dtku41.xyz",
+      "server": "yh7.dtku41.xyz",
       "server_port": 443,
       "uuid": "ebfdccb6-7416-4b6e-860d-98587344d500",
       "tls":
@@ -770,7 +927,7 @@
     {
       "tag": "xray_ip4",
       "type": "vless",
-      "server": "fbi.gov",
+      "server": "yh3.freeh1.xyz",
       "server_port": 443,
       "uuid": "ebfdccb6-7416-4b6e-860d-98587344d500",
       "packet_encoding": "xudp",
@@ -799,399 +956,340 @@
       }
     },
     {
-      "tag": "clash_ip1",
-      "type": "hysteria",
-      "server": "www.dtku50.xyz",
-      "server_port": 11229,
+      "tag": "sing_ip1",
+      "type": "hysteria2",
+      "server": "104.192.224.139",
+      "server_port": 33440,
+      "password": "dongtaiwang.com",
       "up_mbps": 20,
       "down_mbps": 100,
-      "auth_str": "dongtaiwang.com",
-      "disable_mtu_discovery": false,
-      "tcp_fast_open": true,
       "tls":
       {
         "enabled": true,
         "server_name": "bing.com",
         "disable_sni": false,
+        "insecure": true,
         "alpn": [
           "h3"
         ]
       }
     },
     {
-      "tag": "clash_ip13",
+      "tag": "sing_ip2",
+      "type": "hysteria",
+      "server": "www.dtku50.xyz",
+      "server_port": 44001,
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tcp_fast_open": true,
+      "connect_timeout": "5s",
+      "domain_strategy": "prefer_ipv4",
+      "fallback_delay": "300ms",
+      "recv_window_conn": 0,
+      "recv_window": 0,
+      "disable_mtu_discovery": false,
+      "auth_str": "dongtaiwang.com",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "type": "shadowsocks",
+      "tag": "sing_ip3",
+      "method": "2022-blake3-chacha20-poly1305",
+      "password": "6qfEwR4QOrHq+k3csNdEZgMa+Y890g/eouGnVEtxb0c=",
+      "detour": "sing_ip3_stls",
+      "multiplex":
+      {
+        "enabled": true,
+        "protocol": "h2mux",
+        "max_connections": 1,
+        "min_streams": 4,
+        "padding": false
+      }
+    },
+    {
+      "type": "shadowtls",
+      "tag": "sing_ip3_stls",
+      "server": "www2.dtku44.xyz",
+      "server_port": 443,
+      "version": 3,
+      "password": "LdjpJtNZK+2WhXfRY+FxR9sokcOYoddKAx8dN7q8FOI=",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "nijigen-works.jp",
+        "utls":
+        {
+          "enabled": false,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "shadowsocks",
+      "tag": "sing_ip4",
+      "method": "2022-blake3-chacha20-poly1305",
+      "password": "5IH4rBauUuOT4VpAshgMPMSQ3Tf+oJjDY/jEDbIel2Q=",
+      "detour": "sing_ip4_stls",
+      "multiplex":
+      {
+        "enabled": true,
+        "protocol": "h2mux",
+        "max_connections": 1,
+        "min_streams": 4,
+        "padding": false
+      }
+    },
+    {
+      "type": "shadowtls",
+      "tag": "sing_ip4_stls",
+      "server": "172.83.156.157",
+      "server_port": 44550,
+      "version": 3,
+      "password": "FHDLxKgzbcDCPmijble8uT1gddgBmOxA1XXeDgyqgGc=",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "nijigen-works.jp",
+        "utls":
+        {
+          "enabled": false,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "clash_ip1",
+      "type": "hysteria2",
+      "server": "51.159.199.102",
+      "server_port": 33491,
+      "password": "dongtaiwang.com",
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "clash_ip2",
       "type": "tuic",
-      "server": "64.31.55.18",
-      "server_port": 11223,
-      "uuid": "1a0a455e-4207-44be-b5a0-062747671570",
+      "server": "www2.dtku48.xyz",
+      "server_port": 33993,
+      "uuid": "ebff50f5-dc0e-4bff-bcdb-3c7d2638e817",
       "password": "dongtaiwang.com",
       "congestion_control": "bbr",
       "udp_relay_mode": "native",
       "heartbeat": "10s",
       "connect_timeout": "5s",
-      "tcp_fast_open": true,      
+      "tcp_fast_open": true,
       "udp_over_stream": false,
       "tcp_multi_path": false,
       "udp_fragment": false,
       "domain_strategy": "prefer_ipv4",
       "fallback_delay": "300ms",
       "zero_rtt_handshake": false,
-      "auth_timeout": "3s",
       "tls":
       {
         "enabled": true,
         "insecure": true,
-        "disable_sni": true,
-        #"server_name": "*",
+        "disable_sni": false,
+         # "server_name": "*",
         "alpn": [
           "h3"
         ]
       }
-    }
-  ],
-  "route":
-  {
-    "auto_detect_interface": true,
-    "final": "proxy",
-    "rules": [
+    },
+    {
+      "tag": "clash_ip3",
+      "type": "hysteria2",
+      "server": "108.181.5.21",
+      "server_port": 17644,
+      "password": "dongtaiwang.com",
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tls":
       {
-        "protocol": "dns",
-        "outbound": "dns-out"
-      },
-      {
-        "protocol": [
-          "stun"
-        ],
-        "outbound": "block"
-      },
-      {
-        "rule_set": "geosite-category-ads-all",
-        "outbound": "🛑 AdBlock"
-      },
-      {
-        "clash_mode": "direct",
-        "outbound": "direct"
-      },
-      {
-        "clash_mode": "global",
-        "outbound": "proxy"
-      },
-      {
-        "domain": [
-          "clash.razord.top",
-          "yacd.metacubex.one",
-          "yacd.haishan.me",
-          "testingcf.jsdelivr.net",
-          "mirror.ghproxy.com",
-          "d.metacubex.one"
-        ],
-        "outbound": "direct"
-      },      
-      {
-        "domain_suffix": [
-          "163.com",
-          "eu.org",
-          "51cto.com",
-          "csdn.net",
-          "qq.com",
-          "pa18.com",
-          "pingan.com",
-          "ghproxy.com",
-          "mirror.ghproxy.com",
-          "jsdelivr.net",
-          "testingcf.jsdelivr.net",
-          "lingtong.com",
-          ".cn"
-        ],
-        "outbound": "direct"
-      },
-      {
-        "rule_set": "geosite-openai",
-        "outbound": "🤖 OpenAI"
-      },
-      {
-        "rule_set": "geosite-youtube",
-        "outbound": "🌌 Google"
-      },
-      {
-        "rule_set": "geoip-google",
-        "outbound": "🌌 Google"
-      },
-      {
-        "rule_set": [
-          "geosite-google",
-          "geosite-github"
-        ],
-        "outbound": "🌌 Google"
-      },
-      {
-        "rule_set": "geoip-telegram",
-        "outbound": "📟 Telegram"
-      },
-      {
-        "rule_set": "geosite-telegram",
-        "outbound": "📟 Telegram"
-      },
-      {
-        "rule_set": "geoip-twitter",
-        "outbound": "🐦 Twitter"
-      },
-      {
-        "rule_set": "geosite-twitter",
-        "outbound": "🐦 Twitter"
-      },
-      {
-        "rule_set": "geoip-facebook",
-        "outbound": "👤 Facebook"
-      },
-      {
-        "rule_set": [
-          "geosite-facebook",
-          "geosite-instagram"
-        ],
-        "outbound": "👤 Facebook"
-      },
-      {
-        "rule_set": "geosite-amazon",
-        "outbound": "🛍️ Amazon"
-      },
-      {
-        "rule_set": "geosite-apple",
-        "outbound": "🍎 Apple"
-      },
-      {
-        "rule_set": "geosite-microsoft",
-        "outbound": "🧩 Microsoft"
-      },
-      {
-        "rule_set": "geosite-category-games",
-        "outbound": "🎮 Game"
-      },
-      {
-        "rule_set": "geosite-bilibili",
-        "outbound": "📺 Bilibili"
-      },
-      {
-        "rule_set": "geoip-netflix",
-        "outbound": "🎬 MediaVideo"
-      },
-      {
-        "rule_set": [
-          "geosite-tiktok",
-          "geosite-netflix",
-          "geosite-hbo",
-          "geosite-disney",
-          "geosite-primevideo"
-        ],
-        "outbound": "🎬 MediaVideo"
-      },
-      {
-        "rule_set": "geosite-geolocation-!cn",
-        "outbound": "🌏 !cn"
-      },
-      {
-        "ip_is_private": true,
-        "outbound": "🌏 cn"
-      },
-      {
-        "rule_set": "geoip-cn",
-        "outbound": "🌏 cn"
-      },
-      {
-        "rule_set": "geosite-cn",
-        "outbound": "🌏 cn"
+        "enabled": true,
+        "server_name": "www.bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
       }
-    ],
-    "rule_set": [
-      {
-        "tag": "geoip-google",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/google.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geoip-telegram",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/telegram.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geoip-twitter",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/twitter.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geoip-facebook",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/facebook.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geoip-netflix",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/netflix.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geoip-cn",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/cn.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-openai",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/openai.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-youtube",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/youtube.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-google",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/google.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-github",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/github.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-telegram",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/telegram.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-twitter",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/twitter.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-facebook",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/facebook.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-instagram",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/instagram.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-amazon",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/amazon.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-apple",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/apple.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-microsoft",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/microsoft.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-category-games",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/category-games.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-bilibili",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/bilibili.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-tiktok",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/tiktok.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-netflix",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/netflix.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-hbo",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/hbo.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-disney",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/disney.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-primevideo",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/primevideo.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-cn",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/cn.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-geolocation-!cn",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/geolocation-!cn.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-category-ads-all",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/category-ads-all.srs",
-        "download_detour": "direct"
-      }
-    ]
-  }
-}
+    },
+    {
+      "tag": "clash_ip3-1",
+      "type": "shadowsocks",
+      "detour": "" claship31out ",
+            " method ": " 2022 - blake3 - chacha20 - poly1305 ",
+            " password ": " vidC9EcfzKzc / zx9iu8VkKTA0xXTJoWTX / 90IvHAHtU = ",
+              " multiplex ":
+              {
+                " enabled ": true
+              }
+            },
+            {
+              " type ": " shadowtls ",
+              " tag ": " claship31out ",
+              " server ": " www2.dtku48.xyz ",
+              " server_port ": 33001,
+              " version ": 3,
+              " password ": " q2t9sUj + 7N5CztGHJCKvfWbfCRD0qOg2ZEKOb0h7 + 7k = ",
+              " tls ":
+              {
+                " enabled ": true,
+                " server_name ": " nijigen - works.jp ",
+                " utls ":
+                {
+                  " enabled ": false,
+                  " fingerprint ": " chrome "
+                }
+              }
+            },
+            {
+              " tag ": " clash_ip4 ",
+              " type ": " shadowsocks ",
+              " server ": " 109.104.152.186 ",
+              " server_port ": 11223,
+              " method ": " 2022 - blake3 - chacha20 - poly1305 ",
+              " password ": " 7 / bb9x3TJQ4Y5SRA / Al3OdwxIk4uf3Jg8N9wDQg + Uto = ",
+              " multiplex ":
+              {
+                " enabled ": true,
+                " protocol ": " smux ",
+                " max_connections ": 1,
+                " min_streams ": 4,
+                " max_streams ": 0,
+                " padding ": true,
+                " brutal ":
+                {
+                  " enabled ": true,
+                  " up_mbps ": 11,
+                  " down_mbps ": 55
+                }
+              }
+            },
+            {
+              " tag ": " clash_ip5 ",
+              " type ": " vmess ",
+              " server ": " yh7.freeh1.xyz ",
+              " server_port ": 8080,
+              " uuid ": " 01c3345a - aadb - 4e07 - a920 - 947c20d83096 ",
+              " security ": " auto ",
+              " alter_id ": 0,
+              " tls ":
+              {
+                " enabled ": false,
+                " server_name ": " emily - citizen - oxford - gba.trycloudflare.com ",
+                " utls ":
+                {
+                  " enabled ": false,
+                  " fingerprint ": " chrome "
+                }
+              },
+              " packet_encoding ": " packetaddr ",
+              " transport ":
+              {
+                " type ": " ws ",
+                " path ": " 01c3345a - aadb - 4e07 - a920 - 947c20d83096 - vm ",
+                " headers ":
+                {
+                  " host ": " emily - citizen - oxford - gba.trycloudflare.com "
+                },
+                " max_early_data ": 2048,
+                " early_data_header_name ": " Sec - WebSocket - Protocol "
+              }
+            },
+            {
+              " tag ": " clash_ip6 ",
+              " type ": " hysteria2 ",
+              " server ": " www.dtku40.xyz ",
+              " server_port ": 22334,
+              " password ": " dongtaiwang.com ",
+              " up_mbps ": 20,
+              " down_mbps ": 100,
+              " tls ":
+              {
+                " enabled ": true,
+                " server_name ": " bing.com ",
+                " disable_sni ": false,
+                " insecure ": true,
+                " alpn ": [
+                  " h3 "
+                ]
+              }
+            },
+            {
+              " tag ": " clash_ip13 ",
+              " type ": " tuic ",
+              " server ": " 64.31.55.18 ",
+              " server_port ": 11223,
+              " uuid ": " 1a0a455e - 4207 - 44be - b5a0 - 062747671570 ",
+              " password ": " dongtaiwang.com ",
+              " congestion_control ": " bbr ",
+              " udp_relay_mode ": " native ",
+              " heartbeat ": " 10s ",
+              " connect_timeout ": " 5s ",
+              " tcp_fast_open ": true,
+              " udp_over_stream ": false,
+              " tcp_multi_path ": false,
+              " udp_fragment ": false,
+              " domain_strategy ": " prefer_ipv4 ",
+              " fallback_delay ": " 300ms ",
+              " zero_rtt_handshake ": false,
+              " tls ":
+              {
+                " enabled ": true,
+                " insecure ": true,
+                " disable_sni ": true,
+                " server_name ": " * ",
+                " alpn ": [
+                  " h3 "
+                ]
+              }
+            },
+            {
+              " type ": " direct ",
+              " tag ": " direct "
+            },
+            {
+              " type ": " block ",
+              " tag ": " block "
+            },
+            {
+              " type ": " dns ",
+              " tag ": " dns - out "
+            }
+          ],
+          " experimental ":
+          {
+            " clash_api ":
+            {
+              " external_controller ": " 127.0.0.1: 9090 ",
+              " external_ui ": " ui ",
+              " secret ": " Michael ",
+              " default_mode ": " rule "
+            },
+            " cache_file ":
+            {
+              " enabled ": true,
+              " store_fakeip ": false
+            }
+          }
+        }
