@@ -1130,7 +1130,6 @@
         "enabled": true,
         "insecure": true,
         "disable_sni": false,
-         # "server_name": "*",
         "alpn": [
           "h3"
         ]
@@ -1158,7 +1157,7 @@
     {
       "tag": "clash_ip3-1",
       "type": "shadowsocks",
-      "detour": ""claship31out",
+      "detour": "claship31out",
       "method": "2022-blake3-chacha20-poly1305",
       "password": "vidC9EcfzKzc/zx9iu8VkKTA0xXTJoWTX/90IvHAHtU=",
       "multiplex":
