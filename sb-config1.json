@@ -422,7 +422,7 @@
     "tag":"redirect-in",
     "listen":"::",
     "sniff_override_destination": false,
-    "listen_port": 3080
+    "listen_port": 3080,
     "sniff": true
     }
   ],
