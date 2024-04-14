@@ -409,6 +409,21 @@
         "com.huawei.contacts.sync"
       ],
       "sniff_override_destination": false
+    },
+    {
+    "type": "mixed",
+    "tag": "mixed-in",
+    "listen":"::",
+    "listen_port": 2080,
+    "sniff": true
+    },
+    {
+    "type": "redirect",
+    "tag":"redirect-in",
+    "listen":"::",
+    "sniff_override_destination": false,
+    "listen_port": 3080
+    "sniff": true
     }
   ],
   "outbounds": [
