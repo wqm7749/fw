@@ -329,7 +329,6 @@
       "strict_route": true,
       "stack": "gvisor",
       "sniff": true,
-      "tcp_fast_open": true,
       "domain_strategy": "prefer_ipv4",
       "platform":
       {
@@ -417,7 +416,6 @@
     "tag": "mixed-in",
     "listen":"127.0.0.1",
     "listen_port": 2080,
-    "tcp_fast_open": true,
     "domain_strategy": "prefer_ipv4",
     "sniff": true
     },
@@ -427,7 +425,6 @@
     "listen":"127.0.0.1",
     "sniff_override_destination": false,
     "domain_strategy": "prefer_ipv4",
-    "tcp_fast_open": true,
     "listen_port": 3080,
     "sniff": true
     }
