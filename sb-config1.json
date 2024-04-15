@@ -194,7 +194,6 @@
           "ghproxy.com",
           "mirror.ghproxy.com",
           "jsdelivr.net",
-          "testingcf.jsdelivr.net",
           "lingtong.com"
         ],
         "outbound": "direct"
@@ -1225,7 +1224,7 @@
     {
       "tag": "clash_ip5",
       "type": "vmess",
-      "server": "www.visa.com.hk",
+      "server": "malaysia.com",
       "server_port": 8080,
       "uuid": "01c3345a-aadb-4e07-a920-947c20d83096",
       "security": "auto",
