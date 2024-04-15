@@ -50,7 +50,7 @@
       {
         "rule_set": "geosite-geolocation-!cn",
         "server": "dns_proxy"
-      }      
+      },     
       {
         "rule_set": [
           
