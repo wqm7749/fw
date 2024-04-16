@@ -246,6 +246,7 @@
           "com.paypal.android.p2pmobile",
           "sudoku.puzzle.free.game.brain",
           "com.reddit.frontpage",
+          "com.android.providers.contacts",
           "com.zhiliaoapp.musically"
         ],
         "outbound": "proxy"
@@ -411,7 +412,7 @@
     {
     "type": "mixed",
     "tag": "mixed-in",
-    "listen":"127.0.0.1",
+    "listen":"::",
     "listen_port": 2080,
     "domain_strategy": "prefer_ipv4",
     "sniff": true
@@ -419,7 +420,7 @@
     {
     "type": "redirect",
     "tag":"redirect-in",
-    "listen":"127.0.0.1",
+    "listen":"::",
     "sniff_override_destination": false,
     "domain_strategy": "prefer_ipv4",
     "listen_port": 3080,
@@ -465,7 +466,8 @@
         "clash_ip5",
         "clash_ip6",
         "clash_ip13"
-      ]
+      ],
+      "interrupt_exist_connections": true
     },
     {
       "tag": "auto",
@@ -568,8 +570,8 @@
     {
       "tag": "hy2_ip4",
       "type": "hysteria2",
-      "server": "109.104.152.194",
-      "server_port": 20352,
+      "server": "104.192.224.140",
+      "server_port": 40391,
       "password": "dongtaiwang.com",
       "up_mbps": 20,
       "down_mbps": 100,
@@ -592,6 +594,7 @@
       "password": "dongtaiwang.com",
       "up_mbps": 20,
       "down_mbps": 100,
+      "domain_strategy": "prefer_ipv4",
       "tls":
       {
         "enabled": true,
@@ -746,6 +749,7 @@
       "recv_window_conn": 0,
       "recv_window": 0,
       "disable_mtu_discovery": false,
+      "domain_strategy": "prefer_ipv4",
       "auth_str": "dongtaiwang.com",
       "tls":
       {
@@ -771,6 +775,7 @@
       "recv_window_conn": 0,
       "recv_window": 0,
       "disable_mtu_discovery": false,
+      "domain_strategy": "prefer_ipv4",
       "auth_str": "dongtaiwang.com",
       "tls":
       {
@@ -791,6 +796,7 @@
       "password": "dongtaiwang.com",
       "up_mbps": 20,
       "down_mbps": 100,
+      "domain_strategy": "prefer_ipv4",
       "tls":
       {
         "enabled": true,
@@ -851,13 +857,13 @@
       "tcp_multi_path": false,
       "udp_fragment": false,
       "fallback_delay": "300ms",
+      "domain_strategy": "prefer_ipv4",
       "zero_rtt_handshake": false,
       "tls":
       {
         "enabled": true,
         "insecure": true,
         "disable_sni": false,
-        "server_name": "*",
         "alpn": [
           "h3"
         ]
@@ -871,6 +877,7 @@
       "password": "dongtaiwang.com",
       "up_mbps": 20,
       "down_mbps": 100,
+      "domain_strategy": "prefer_ipv4",
       "tls":
       {
         "enabled": true,
