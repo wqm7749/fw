@@ -175,6 +175,27 @@
         "outbound": "block"
       },
       {
+        "clash_mode": "Direct",
+        "outbound": "direct"
+      },
+      {
+        "clash_mode": "Global",
+        "outbound": "proxy"
+      },      
+      {
+        "domain": [
+          "googleapis.cn",
+          "google.cn",
+          "googleapis.com",
+          "google.com.tw",
+          "google.com.hk",
+          "google.com",
+          "gstatic.com",
+          "xn--ngstr-lra8j.com"
+        ],
+        "outbound": "proxy"
+      },
+      {
         "domain_suffix": [
           "googleapis.cn",
           "google.cn",
