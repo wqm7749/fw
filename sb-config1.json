@@ -10,11 +10,18 @@
     "servers": [
       {
         "tag": "dns_proxy",
-        "address": "https://1.1.1.1/dns-query",
+        "address": "https://8.8.8.8/dns-query",
         "address_resolver": "dns_resolver",
         "strategy": "prefer_ipv4",
         "detour": "proxy"
       },
+      {
+        "tag": "cf",
+        "address": "https://1.1.1.1/dns-query",
+        "address_resolver": "dns_resolver",
+        "strategy": "prefer_ipv4",
+        "detour": "proxy"
+      },      
       {
         "tag": "dns_direct",
         "address": "https://dns.alidns.com/dns-query",
@@ -24,7 +31,7 @@
       },
       {
         "tag": "dns_resolver",
-        "address": "223.5.5.5",
+        "address": "223.5.5.5", 
         "detour": "direct"
       },
       {
@@ -43,14 +50,11 @@
           "geosite-android",
           "geosite-googlefcm",
           "geosite-bytedance@!cn",
-          "geosite-google"
+          "geosite-google",
+          "geosite-geolocation-!cn"
         ],
         "server": "dns_proxy"
-      },
-      {
-        "rule_set": "geosite-geolocation-!cn",
-        "server": "dns_proxy"
-      },     
+      },    
       {
         "rule_set": [
           
@@ -62,7 +66,7 @@
         "server": "dns_direct"
       }
     ],
-    "final": "dns_proxy"
+    "final": "cf"
   },
   "route":
   {
@@ -985,7 +989,7 @@
     {
       "tag": "xray_ip4",
       "type": "vless",
-      "server": "www.4chan.org",
+      "server": "yh9.dtku41.xy",
       "server_port": 443,
       "uuid": "ebfdccb6-7416-4b6e-860d-98587344d500",
       "packet_encoding": "xudp",
@@ -1250,6 +1254,7 @@
       "uuid": "01c3345a-aadb-4e07-a920-947c20d83096",
       "security": "auto",
       "alter_id": 0,
+      "network": "tcp",
       "tls":
       {
         "enabled": false,
@@ -1298,6 +1303,7 @@
       "server": "109.104.152.101",
       "server_port": 13982,
       "uuid": "85beb960-236b-4634-81ce-6ad66652f928",
+      "network": "tcp",
       "tls":
       {
         "enabled": true,
