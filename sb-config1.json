@@ -57,11 +57,14 @@
       },    
       {
         "rule_set": [
-          
           "geosite-alibaba",
           "geosite-bytedance",
           "geosite-jd",
-          "geosite-geolocation-cn"
+          "geosite-tencent-cn",
+          "geosite-baidu",
+          "geosite-icloud-cn",
+          "geosite-geolocation-cn",
+          "geosite-cn"
         ],
         "server": "dns_direct"
       },
@@ -72,7 +75,7 @@
       {
         "clash_mode": "Global",
         "server": "dns_proxy"
-      }     
+      }
     ],
     "final": "cf"
   },
@@ -86,6 +89,20 @@
         "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-!cn.srs",
         "download_detour": "direct"
       },
+      {
+        "tag": "geosite-icloud-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-icloud@cn.srs",
+        "download_detour": "direct"
+      },
+      {
+        "tag": "geosite-baidu",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-baidu.srs",
+        "download_detour": "direct"
+      },      
       {
         "tag": "geosite-bytedance",
         "type": "remote",
@@ -108,6 +125,13 @@
         "download_detour": "direct"
       },
       {
+        "tag": "geosite-tencent-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-tencent@cn.srs",
+        "download_detour": "direct"
+      },      
+      {
         "tag": "geosite-jd",
         "type": "remote",
         "format": "binary",
@@ -121,6 +145,13 @@
         "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-cn.srs",
         "download_detour": "direct"
       },
+      {
+        "tag": "geosite-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
+        "download_detour": "direct"
+      },      
       {
         "tag": "geosite-greatfire",
         "type": "remote",
@@ -334,21 +365,13 @@
             "rule_set": [
               "geosite-alibaba",
               "geosite-jd",
-              "geosite-bytedance"
+              "geosite-icloud-cn",
+              "geosite-tencent-cn",
+              "geosite-baidu",
+              "geosite-bytedance",
+              "geosite-geolocation-cn",
+              "geosite-cn"
             ]
-          }
-        ],
-        "outbound": "direct"
-      },
-      {
-        "type": "logical",
-        "mode": "and",
-        "rules": [
-          {
-            "rule_set": "geoip-cn"
-          },
-          {
-            "rule_set": "geosite-geolocation-cn"
           }
         ],
         "outbound": "direct"
@@ -362,6 +385,7 @@
         "outbound": "direct"
       }
     ],
+    "override_android_vpn": false,
     "auto_detect_interface": true
   },
   "inbounds": [
@@ -453,6 +477,7 @@
           "com.hpbr.bosszhipin",
           "com.autonavi.minimap",
           "com.lizongying.mytv",
+          "com.android.mms",
           "com.huawei.contacts.sync"
       ],
       "sniff_override_destination": false
