@@ -72,7 +72,7 @@
       {
         "clash_mode": "Global",
         "server": "dns_proxy"
-      },      
+      }     
     ],
     "final": "cf"
   },
