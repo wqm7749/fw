@@ -64,7 +64,15 @@
           "geosite-geolocation-cn"
         ],
         "server": "dns_direct"
-      }
+      },
+      {
+        "clash_mode": "Direct",
+        "server": "dns_direct"
+      },
+      {
+        "clash_mode": "Global",
+        "server": "dns_proxy"
+      },      
     ],
     "final": "cf"
   },
@@ -190,6 +198,7 @@
           "google.com.tw",
           "google.com.hk",
           "google.com",
+          "google.dev",
           "gstatic.com",
           "xn--ngstr-lra8j.com"
         ],
@@ -202,6 +211,7 @@
           "googleapis.com",
           "google.com.tw",
           "google.com.hk",
+          "google.dev",
           "google.com",
           "gstatic.com",
           "xn--ngstr-lra8j.com"
@@ -478,6 +488,7 @@
         "hy2_ip2",
         "hy2_ip4",
         "hy2_ip5",
+        "hy2_ip6",
         "hy1_ip1",
         "hy1_ip13",
         "hy1_ip2",
@@ -506,6 +517,7 @@
         "clash_ip6",
         "clash_ip13"
       ],
+      "default": "auto",
       "interrupt_exist_connections": true
     },
     {
@@ -517,6 +529,7 @@
         "hy2_ip2",
         "hy2_ip4",
         "hy2_ip5",
+        "hy2_ip6",
         "hy1_ip1",
         "hy1_ip13",
         "hy1_ip2",
@@ -645,6 +658,26 @@
         ]
       }
     },
+    {
+      "tag": "hy2_ip6",
+      "type": "hysteria2",
+      "server": "64.42.176.178",
+      "server_port": 50690,
+      "password": "dongtaiwang.com",
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "domain_strategy": "prefer_ipv4",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "www.bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },    
     {
       "tag": "hy1_ip1",
       "type": "hysteria",
@@ -1358,7 +1391,7 @@
         }
       },
       "packet_encoding": "xudp"
-    },
+    },    
     {
       "type": "direct",
       "tag": "direct"
