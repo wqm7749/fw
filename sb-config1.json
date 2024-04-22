@@ -525,11 +525,13 @@
         "quick_ip2",
         "quick_ip3",
         "quick_ip4",
+        "quick_ip4-1",
         "xray_ip1",
         "xray_ip2",
         "xray_ip3",
         "xray_ip4",
         "sing_ip1",
+        "sing_ip1-1",
         "sing_ip2",
         "sing_ip3",
         "sing_ip4",
@@ -566,11 +568,13 @@
         "quick_ip2",
         "quick_ip3",
         "quick_ip4",
+        "quick_ip4-1",
         "xray_ip1",
         "xray_ip2",
         "xray_ip3",
         "xray_ip4",
         "sing_ip1",
+        "sing_ip1-1",
         "sing_ip2",
         "sing_ip3",
         "sing_ip4",
@@ -987,6 +991,34 @@
       }
     },
     {
+      "tag": "quick_ip4-1",
+      "type": "tuic",
+      "server": "51.159.77.153",
+      "server_port": 44559,
+      "uuid": "2f8f3873-9edf-4c4e-9888-b8a8b2d9d809",
+      "password": "dongtaiwang.com",
+      "congestion_control": "bbr",
+      "udp_relay_mode": "native",
+      "heartbeat": "10s",
+      "connect_timeout": "5s",
+      "tcp_fast_open": true,
+      "udp_over_stream": false,
+      "tcp_multi_path": false,
+      "udp_fragment": false,
+      "fallback_delay": "300ms",
+      "domain_strategy": "prefer_ipv4",
+      "zero_rtt_handshake": false,
+      "tls":
+      {
+        "enabled": true,
+        "insecure": true,
+        "disable_sni": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },    
+    {
       "tag": "xray_ip1",
       "type": "shadowsocks",
       "server": "www.dtku44.xyz",
@@ -1116,6 +1148,32 @@
       }
     },
     {
+      "tag": "sing_ip1-1",
+      "type": "hysteria",
+      "server": "104.192.224.139",
+      "server_port": 55118,
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tcp_fast_open": true,
+      "connect_timeout": "5s",
+      "domain_strategy": "prefer_ipv4",
+      "fallback_delay": "300ms",
+      "recv_window_conn": 0,
+      "recv_window": 0,
+      "disable_mtu_discovery": false,
+      "auth_str": "dongtaiwang.com",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
       "tag": "sing_ip2",
       "type": "hysteria",
       "server": "www.dtku50.xyz",
@@ -1209,18 +1267,27 @@
     },
     {
       "tag": "clash_ip1",
-      "type": "hysteria2",
+      "type": "tuic",
       "server": "51.159.199.102",
-      "server_port": 33491,
+      "server_port": 33008,
+      "uuid": "df19a216-8317-4890-829c-a8b7717d53d6",
       "password": "dongtaiwang.com",
-      "up_mbps": 20,
-      "down_mbps": 100,
+      "congestion_control": "bbr",
+      "udp_relay_mode": "native",
+      "heartbeat": "10s",
+      "connect_timeout": "5s",
+      "tcp_fast_open": true,
+      "udp_over_stream": false,
+      "tcp_multi_path": false,
+      "udp_fragment": false,
+      "domain_strategy": "prefer_ipv4",
+      "fallback_delay": "300ms",
+      "zero_rtt_handshake": false,
       "tls":
       {
         "enabled": true,
-        "server_name": "bing.com",
-        "disable_sni": false,
         "insecure": true,
+        "disable_sni": true,
         "alpn": [
           "h3"
         ]
@@ -1278,7 +1345,7 @@
       "type": "shadowsocks",
       "detour": "claship31out",
       "method": "2022-blake3-chacha20-poly1305",
-      "password": "vidC9EcfzKzc/zx9iu8VkKTA0xXTJoWTX/90IvHAHtU=",
+      "password": "G0YFHkYjXjU0wE2eM/7YaFNYCvzKa28VEXjPUclhyrg=",
       "multiplex":
       {
         "enabled": true
@@ -1290,7 +1357,7 @@
       "server": "www2.dtku48.xyz",
       "server_port": 33001,
       "version": 3,
-      "password": "q2t9sUj+7N5CztGHJCKvfWbfCRD0qOg2ZEKOb0h7+7k=",
+      "password": "fef3d3c2-ab3e-4134-a2f3-0c2d83e0a76d",
       "tls":
       {
         "enabled": true,
@@ -1359,18 +1426,27 @@
     },
     {
       "tag": "clash_ip6",
-      "type": "hysteria2",
+      "type": "tuic",
       "server": "www.dtku40.xyz",
-      "server_port": 22334,
+      "server_port": 33098,
+      "uuid": "fef3d3c2-ab3e-4134-a2f3-0c2d83e0a76d",
       "password": "dongtaiwang.com",
-      "up_mbps": 20,
-      "down_mbps": 100,
+      "congestion_control": "bbr",
+      "udp_relay_mode": "native",
+      "heartbeat": "10s",
+      "connect_timeout": "5s",
+      "tcp_fast_open": true,
+      "udp_over_stream": false,
+      "tcp_multi_path": false,
+      "udp_fragment": false,
+      "fallback_delay": "300ms",
+      "zero_rtt_handshake": false,
+      "domain_strategy": "prefer_ipv4",
       "tls":
       {
         "enabled": true,
-        "server_name": "bing.com",
-        "disable_sni": false,
         "insecure": true,
+        "disable_sni": true,
         "alpn": [
           "h3"
         ]
