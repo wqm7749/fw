@@ -237,6 +237,7 @@
       },
       {
         "domain_suffix": [
+          "xn--ngstr-lra8j.com",          
           "googleapis.cn",
           "google.cn",
           "googleapis.com",
@@ -244,8 +245,7 @@
           "google.com.hk",
           "google.dev",
           "google.com",
-          "gstatic.com",
-          "xn--ngstr-lra8j.com"
+          "gstatic.com"
         ],
         "outbound": "proxy"
       },      
@@ -385,6 +385,7 @@
         "outbound": "direct"
       }
     ],
+    "final": "proxy",
     "override_android_vpn": false,
     "auto_detect_interface": true
   },
@@ -484,7 +485,6 @@
     },
     {
       "type": "mixed",
-      "tag": "mixed-in",
       "listen":"::",
       "listen_port": 2080,
       "domain_strategy": "prefer_ipv4",
@@ -493,7 +493,6 @@
     },
     {
       "type": "redirect",
-      "tag":"redirect-in",
       "listen":"::",
       "domain_strategy": "prefer_ipv4",
       "listen_port": 3080,
@@ -535,6 +534,7 @@
         "sing_ip2",
         "sing_ip3",
         "sing_ip4",
+        "sing_ip5",
         "clash_ip1",
         "clash_ip2",
         "clash_ip3",
@@ -578,6 +578,7 @@
         "sing_ip2",
         "sing_ip3",
         "sing_ip4",
+        "sing_ip5",
         "clash_ip1",
         "clash_ip2",
         "clash_ip3",
@@ -1265,6 +1266,32 @@
         }
       }
     },
+    {
+      "tag": "sing_ip5",
+      "type": "hysteria",
+      "server": "64.31.55.72",
+      "server_port": 55661,
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tcp_fast_open": true,
+      "connect_timeout": "5s",
+      "domain_strategy": "prefer_ipv4",
+      "fallback_delay": "300ms",
+      "recv_window_conn": 0,
+      "recv_window": 0,
+      "disable_mtu_discovery": false,
+      "auth_str": "dongtaiwang.com",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },    
     {
       "tag": "clash_ip1",
       "type": "tuic",
