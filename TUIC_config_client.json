@@ -1,10 +1,31 @@
 
 {
   "inbounds": [
+        {
+      "type": "tun",
+      "tag": "tun-in",
+      "inet4_address": "172.16.0.1/30",
+      "inet6_address": "fd00::1/126",
+      "mtu": 1400,
+      "auto_route": true,
+      "strict_route": true,
+      "stack": "system",
+      "sniff": true,
+      "sniff_override_destination": false,
+      "platform":
+      {
+        "http_proxy":
+        {
+          "enabled": true,
+          "server": "127.0.0.1",
+          "server_port": 2080
+        }
+      }
+    },
     {
       "type": "mixed",
       "listen": "::",
-      "listen_port": 10000
+      "listen_port": 2080
     }
   ],
   "outbounds": [
@@ -25,13 +46,12 @@
       "domain_strategy": "prefer_ipv4",
       "fallback_delay": "300ms",
       "zero_rtt_handshake": false,
-      "auth_timeout": "3s",
       "tls":
       {
         "enabled": true,
         "insecure": true,
         "disable_sni": false,
-        "server_name": "*",
+        "server_name": "123",
         "alpn": [
           "h3"
         ]
