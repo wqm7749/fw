@@ -215,8 +215,7 @@
       },      
       {
         "port": [
-          853,
-          443
+          853
         ],
         "network": "udp",
         "outbound": "block"
@@ -551,6 +550,7 @@
         "clash_ip4",
         "clash_ip5",
         "clash_ip6",
+        "clash_ip7",
         "clash_ip13"
       ],
       "default": "auto",
@@ -596,6 +596,7 @@
         "clash_ip4",
         "clash_ip5",
         "clash_ip6",
+        "clash_ip7",
         "clash_ip13"
       ],
       "url": "http://cp.cloudflare.com/",
@@ -877,8 +878,8 @@
     {
       "tag": "hy1_ip7",
       "type": "hysteria",
-      "server": "108.181.5.133",
-      "server_port": 26022,
+      "server": "64.31.55.72",
+      "server_port": 55661,
       "up_mbps": 20,
       "down_mbps": 100,
       "tcp_fast_open": true,
@@ -1520,6 +1521,34 @@
         ]
       }
     },
+    {
+      "tag": "clash_ip7",
+      "type": "tuic",
+      "server": "74.63.233.74",
+      "server_port": 33441,
+      "uuid": "a258065f-9502-4fe6-b3ed-cf7440e25150",
+      "password": "dongtaiwang.com",
+      "congestion_control": "bbr",
+      "udp_relay_mode": "native",
+      "heartbeat": "10s",
+      "connect_timeout": "5s",
+      "tcp_fast_open": true,
+      "udp_over_stream": false,
+      "tcp_multi_path": false,
+      "udp_fragment": false,
+      "fallback_delay": "300ms",
+      "domain_strategy": "prefer_ipv4",
+      "zero_rtt_handshake": false,
+      "tls":
+      {
+        "enabled": true,
+        "insecure": true,
+        "disable_sni": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },    
     {
       "tag": "clash_ip13",
       "type": "vless",
