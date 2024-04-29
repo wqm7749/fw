@@ -210,6 +210,14 @@
         "port": [
           853
         ],
+        "network": "tcp",
+        "outbound": "block"
+      },      
+      {
+        "port": [
+          853,
+          443
+        ],
         "network": "udp",
         "outbound": "block"
       },
@@ -520,6 +528,7 @@
         "hy1_ip5",
         "hy1_ip6",
         "hy1_ip7",
+        "hy1_ip8",
         "quick_ip1",
         "quick_ip2",
         "quick_ip3",
@@ -564,6 +573,7 @@
         "hy1_ip5",
         "hy1_ip6",
         "hy1_ip7",
+        "hy1_ip8",
         "quick_ip1",
         "quick_ip2",
         "quick_ip3",
@@ -890,6 +900,32 @@
         ]
       }
     },
+   {
+      "tag": "hy1_ip8",
+      "type": "hysteria",
+      "server": "64.42.176.179",
+      "server_port": 50991,
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tcp_fast_open": true,
+      "connect_timeout": "5s",
+      "fallback_delay": "300ms",
+      "recv_window_conn": 0,
+      "recv_window": 0,
+      "disable_mtu_discovery": false,
+      "domain_strategy": "prefer_ipv4",
+      "auth_str": "dongtaiwang.com",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "google.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },    
     {
       "tag": "quick_ip1",
       "type": "hysteria2",
@@ -1350,21 +1386,26 @@
     },
     {
       "tag": "clash_ip3",
-      "type": "hysteria2",
+      "type": "hysteria",
       "server": "108.181.5.21",
-      "server_port": 17644,
-      "password": "dongtaiwang.com",
+      "server_port": 44550,
       "up_mbps": 20,
       "down_mbps": 100,
+      "tcp_fast_open": true,
+      "connect_timeout": "5s",
+      "domain_strategy": "prefer_ipv4",
+      "fallback_delay": "300ms",
+      "recv_window_conn": 0,
+      "recv_window": 0,
+      "disable_mtu_discovery": false,
+      "auth_str": "dongtaiwang.com",
       "tls":
       {
         "enabled": true,
-        "server_name": "www.bing.com",
-        "disable_sni": false,
+        "server_name": "bing.com",
         "insecure": true,
-        "alpn": [
-          "h3"
-        ]
+        "disable_sni": false,
+        "alpn": "h3"
       }
     },
     {
