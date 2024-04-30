@@ -1,0 +1,1375 @@
+
+{
+  "log":
+  {
+    "level": "info",
+    "timestamp": true
+  },
+  "dns":
+  {
+    "servers": [
+      {
+        "tag": "dns_proxy",
+        "address": "tcp://1.1.1.1",
+        "address_resolver": "dns_resolver",
+        "strategy": "ipv4_only",
+        "detour": "proxy"
+      },
+      {
+        "tag": "dns_direct",
+        "address": "https://dns.alidns.com/dns-query",
+        "address_resolver": "dns_resolver",
+        "strategy": "ipv4_only",
+        "detour": "direct"
+      },
+      {
+        "tag": "dns_resolver",
+        "address": "223.5.5.5",
+        "detour": "direct"
+      },
+      {
+        "tag": "dns_success",
+        "address": "rcode://success"
+      },
+      {
+        "tag": "dns_refused",
+        "address": "rcode://refused"
+      },
+      {
+        "tag": "dns_fakeip",
+        "address": "fakeip"
+      }
+    ],
+    "rules": [
+      {
+        "outbound": "any",
+        "server": "dns_resolver"
+      },
+      {
+        "rule_set": "geosite-geolocation-!cn",
+        "query_type": [
+          "A",
+          "AAAA",
+          "CNAME"
+        ],
+        "server": "dns_proxy"
+      },
+      {
+        "query_type": [
+          "A",
+          "AAAA",
+          "CNAME"
+        ],
+        "invert": true,
+        "server": "dns_refused",
+        "disable_cache": true
+      }
+    ],
+    "final": "dns_direct",
+    "independent_cache": true,
+    "fakeip":
+    {
+      "enabled": true,
+      "inet4_range": "198.18.0.0/15",
+      "inet6_range": "fc00::/18"
+    }
+  },
+  "route":
+  {
+    "rule_set": [
+      {
+        "tag": "geosite-geolocation-!cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-!cn.srs",
+        "download_detour": "proxy"
+      },
+      {
+        "tag": "geoip-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
+        "download_detour": "proxy"
+      }
+    ],
+    "rules": [
+      {
+        "protocol": "dns",
+        "outbound": "dns-out"
+      },
+      {
+        "port": 853,
+        "network": "tcp",
+        "outbound": "block"
+      },
+      {
+        "port": [
+          443,
+          853
+        ],
+        "network": "udp",
+        "outbound": "block"
+      },
+      {
+        "domain": [
+          "clash.razord.top",
+          "yacd.metacubex.one",
+          "yacd.haishan.me",
+          "testingcf.jsdelivr.net",
+          "mirror.ghproxy.com",
+          "testingcf.jsdelivr.net",
+          "d.metacubex.one"
+        ],
+        "outbound": "direct"
+      },
+      {
+        "domain_suffix": [
+          "163.com",
+          "eu.org",
+          "51cto.com",
+          "csdn.net",
+          "qq.com",
+          "pa18.com",
+          "pingan.com",
+          "ghproxy.com",
+          "mirror.ghproxy.com",
+          "jsdelivr.net",
+          "lingtong.com"
+        ],
+        "outbound": "direct"
+      },
+      {
+        "domain": [
+          "xn--ngstr-lra8j.com",
+          "googleapis.cn",
+          "google.cn",
+          "googleapis.com",
+          "google.com.tw",
+          "google.com.hk",
+          "google.com",
+          "google.dev",
+          "gstatic.com"
+        ],
+        "outbound": "proxy"
+      },
+      {
+        "domain_suffix": [
+          "xn--ngstr-lra8j.com",
+          "googleapis.cn",
+          "google.cn",
+          "googleapis.com",
+          "google.com.tw",
+          "google.com.hk",
+          "google.dev",
+          "google.com",
+          "gstatic.com"
+        ],
+        "outbound": "proxy"
+      },
+      {
+        "rule_set": "geosite-geolocation-!cn",
+        "outbound": "proxy"
+      },
+      {
+        "rule_set": "geoip-cn",
+        "outbound": "direct"
+      },
+      {
+        "ip_is_private": true,
+        "outbound": "direct"
+      }
+    ],
+    "final": "proxy",
+    "auto_detect_interface": true
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "inet4_address": "172.16.0.1/30",
+      "inet6_address": "fd00::1/126",
+      "mtu": 1492,
+      "auto_route": true,
+      "strict_route": true,
+      "stack": "gvisor",
+      "sniff": true,
+      "exclude_package": [
+        "com.tencent.qqlivehuawei",
+        "com.ss.android.article.lite",
+        "com.icbc",
+        "com.huawei.lbs",
+        "com.huawei.ims",
+        "com.huawei.hff",
+        "com.huawei.aod",
+        "com.huawei.email",
+        "com.huawei.hiai",
+        "com.huawei.tips",
+        "com.huawei.msdp",
+        "com.huawei.hwid",
+        "com.huawei.hiskytone",
+        "com.huawei.fastapp",
+        "com.huawei.ca",
+        "com.huawei.bd",
+        "com.huawei.trustcircle",
+        "com.huawei.photos",
+        "com.huawei.search",
+        "com.huawei.browser",
+        "com.huawei.suggestion",
+        "com.huawei.secime",
+        "com.huawei.hwvoipservice",
+        "com.huawei.hwdetectrepair",
+        "com.huawei.hwpolicyservice",
+        "com.huawei.game.kitserver",
+        "com.huawei.mmitest",
+        "com.huawei.notepad",
+        "com.huawei.wallet",
+        "com.huawei.assetsyncservice",
+        "com.huawei.assetsync",
+        "com.huawei.rcsserviceapplication",
+        "com.huawei.deskclock",
+        "com.huawei.hwblockchain",
+        "com.huawei.regservice",
+        "com.huawei.gameassistant",
+        "com.huawei.android.totemweather",
+        "com.huawei.android.airsharing",
+        "com.huawei.android.karaoke",
+        "com.huawei.android.wfdft",
+        "com.android.mms.service",
+        "com.chinamworld.bocmbci",
+        "com.chinamworld.main",
+        "com.tencent.wemeet.app",
+        "com.tencent.mm",
+        "com.baidu.input_huawei",
+        "com.zerotier.one",
+        "com.jingdong.app.mall",
+        "com.tmall.wireless",
+        "com.alibaba.android.rimet",
+        "com.taobao.taobao",
+        "com.eg.android.AlipayGphone",
+        "com.csg.elink",
+        "com.greenpoint.android.mc10086.activity",
+        "com.tencent.wework",
+        "com.tmri.app.main",
+        "com.alibaba.android.rimet",
+        "cn.gov.tax.its",
+        "me.ele",
+        "com.csair.mbp",
+        "com.sankuai.meituan",
+        "cn.gov.pbc.dcep",
+        "com.MobileTicket",
+        "com.moutai.mall",
+        "com.hpbr.bosszhipin",
+        "com.autonavi.minimap",
+        "com.lizongying.mytv",
+        "com.android.mms",
+        "com.huawei.contacts.sync"
+      ],
+      "sniff_override_destination": false
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "proxy",
+      "type": "selector",
+      "outbounds": [
+        "auto",
+        "direct",
+        "hy2_ip1",
+        "hy2_ip13",
+        "hy2_ip2",
+        "hy2_ip4",
+        "hy2_ip5",
+        "hy2_ip6",
+        "hy1_ip1",
+        "hy1_ip13",
+        "hy1_ip2",
+        "hy1_ip4",
+        "hy1_ip5",
+        "hy1_ip6",
+        "hy1_ip7",
+        "hy1_ip8",
+        "quick_ip1",
+        "quick_ip2",
+        "quick_ip3",
+        "quick_ip4",
+        "quick_ip4-1",
+        "xray_ip1",
+        "xray_ip2",
+        "xray_ip3",
+        "xray_ip4",
+        "sing_ip1",
+        "sing_ip1-1",
+        "sing_ip2",
+        "sing_ip3",
+        "sing_ip4",
+        "sing_ip5",
+        "clash_ip1",
+        "clash_ip2",
+        "clash_ip3",
+        "clash_ip3-1",
+        "clash_ip4",
+        "clash_ip5",
+        "clash_ip6",
+        "clash_ip7",
+        "clash_ip13"
+      ],
+      "default": "auto",
+      "interrupt_exist_connections": true
+    },
+    {
+      "tag": "auto",
+      "type": "urltest",
+      "outbounds": [
+        "hy2_ip1",
+        "hy2_ip13",
+        "hy2_ip2",
+        "hy2_ip4",
+        "hy2_ip5",
+        "hy2_ip6",
+        "hy1_ip1",
+        "hy1_ip13",
+        "hy1_ip2",
+        "hy1_ip4",
+        "hy1_ip5",
+        "hy1_ip6",
+        "hy1_ip7",
+        "hy1_ip8",
+        "quick_ip1",
+        "quick_ip2",
+        "quick_ip3",
+        "quick_ip4",
+        "quick_ip4-1",
+        "xray_ip1",
+        "xray_ip2",
+        "xray_ip3",
+        "xray_ip4",
+        "sing_ip1",
+        "sing_ip1-1",
+        "sing_ip2",
+        "sing_ip3",
+        "sing_ip4",
+        "sing_ip5",
+        "clash_ip1",
+        "clash_ip2",
+        "clash_ip3",
+        "clash_ip3-1",
+        "clash_ip4",
+        "clash_ip5",
+        "clash_ip6",
+        "clash_ip7",
+        "clash_ip13"
+      ],
+      "url": "http://cp.cloudflare.com/",
+      "interval": "5m",
+      "tolerance": 50
+    },
+    {
+      "tag": "hy2_ip1",
+      "type": "hysteria2",
+      "server": "64.110.25.11",
+      "server_port": 37021,
+      "password": "dongtaiwang.com",
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "www.bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "hy2_ip13",
+      "type": "hysteria2",
+      "server": "51.159.77.198",
+      "server_port": 20261,
+      "password": "dongtaiwang.com",
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "www.bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "hy2_ip2",
+      "type": "hysteria2",
+      "server": "62.210.103.0",
+      "server_port": 22483,
+      "password": "dongtaiwang.com",
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "www.bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "hy2_ip4",
+      "type": "hysteria2",
+      "server": "104.192.224.140",
+      "server_port": 40391,
+      "password": "dongtaiwang.com",
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "www.bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "hy2_ip5",
+      "type": "hysteria2",
+      "server": "104.192.224.141",
+      "server_port": 40391,
+      "password": "dongtaiwang.com",
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "domain_strategy": "prefer_ipv4",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "www.bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "hy2_ip6",
+      "type": "hysteria2",
+      "server": "64.42.176.178",
+      "server_port": 50690,
+      "password": "dongtaiwang.com",
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "domain_strategy": "prefer_ipv4",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "www.bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "hy1_ip1",
+      "type": "hysteria",
+      "server": "51.159.79.103",
+      "server_port": 55396,
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tcp_fast_open": true,
+      "connect_timeout": "5s",
+      "domain_strategy": "prefer_ipv4",
+      "fallback_delay": "300ms",
+      "recv_window_conn": 0,
+      "recv_window": 0,
+      "disable_mtu_discovery": false,
+      "auth_str": "dongtaiwang.com",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "youku.com",
+        "insecure": true,
+        "disable_sni": false,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "hy1_ip13",
+      "type": "hysteria",
+      "server": "173.234.25.51",
+      "server_port": 48919,
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tcp_fast_open": true,
+      "connect_timeout": "5s",
+      "domain_strategy": "prefer_ipv4",
+      "fallback_delay": "300ms",
+      "recv_window_conn": 0,
+      "recv_window": 0,
+      "disable_mtu_discovery": false,
+      "auth_str": "dongtaiwang.com",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "hy1_ip2",
+      "type": "hysteria",
+      "server": "167.160.91.117",
+      "server_port": 14455,
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tcp_fast_open": true,
+      "connect_timeout": "5s",
+      "domain_strategy": "prefer_ipv4",
+      "fallback_delay": "300ms",
+      "recv_window_conn": 0,
+      "recv_window": 0,
+      "disable_mtu_discovery": false,
+      "auth_str": "dongtaiwang.com",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "hy1_ip4",
+      "type": "hysteria",
+      "server": "www.dtku40.xyz",
+      "server_port": 18091,
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tcp_fast_open": true,
+      "connect_timeout": "5s",
+      "domain_strategy": "prefer_ipv4",
+      "fallback_delay": "300ms",
+      "recv_window_conn": 0,
+      "recv_window": 0,
+      "disable_mtu_discovery": false,
+      "auth_str": "dongtaiwang.com",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "hy1_ip5",
+      "type": "hysteria",
+      "server": "62.210.243.131",
+      "server_port": 18702,
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tcp_fast_open": true,
+      "connect_timeout": "5s",
+      "domain_strategy": "prefer_ipv4",
+      "fallback_delay": "300ms",
+      "recv_window_conn": 0,
+      "recv_window": 0,
+      "disable_mtu_discovery": false,
+      "auth_str": "dongtaiwang.com",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "hy1_ip6",
+      "type": "hysteria",
+      "server": "109.104.152.194",
+      "server_port": 58510,
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tcp_fast_open": true,
+      "connect_timeout": "5s",
+      "fallback_delay": "300ms",
+      "recv_window_conn": 0,
+      "recv_window": 0,
+      "disable_mtu_discovery": false,
+      "domain_strategy": "prefer_ipv4",
+      "auth_str": "dongtaiwang.com",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "hy1_ip7",
+      "type": "hysteria",
+      "server": "64.31.55.72",
+      "server_port": 55661,
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tcp_fast_open": true,
+      "connect_timeout": "5s",
+      "fallback_delay": "300ms",
+      "recv_window_conn": 0,
+      "recv_window": 0,
+      "disable_mtu_discovery": false,
+      "domain_strategy": "prefer_ipv4",
+      "auth_str": "dongtaiwang.com",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "hy1_ip8",
+      "type": "hysteria",
+      "server": "64.42.176.179",
+      "server_port": 50991,
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tcp_fast_open": true,
+      "connect_timeout": "5s",
+      "fallback_delay": "300ms",
+      "recv_window_conn": 0,
+      "recv_window": 0,
+      "disable_mtu_discovery": false,
+      "domain_strategy": "prefer_ipv4",
+      "auth_str": "dongtaiwang.com",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "google.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "quick_ip1",
+      "type": "hysteria2",
+      "server": "www2.dtku48.xyz",
+      "server_port": 48726,
+      "password": "dongtaiwang.com",
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "domain_strategy": "prefer_ipv4",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "type": "shadowsocks",
+      "tag": "quick_ip2",
+      "method": "2022-blake3-chacha20-poly1305",
+      "password": "cNoeQiREIlGx+U/pFoRG126lD9U1RT1zkXjei2UaT2w=",
+      "detour": "quick_ip2_stls",
+      "multiplex":
+      {
+        "enabled": true,
+        "protocol": "h2mux",
+        "max_connections": 1,
+        "min_streams": 4,
+        "padding": false
+      }
+    },
+    {
+      "type": "shadowtls",
+      "tag": "quick_ip2_stls",
+      "server": "62.204.54.81",
+      "server_port": 33221,
+      "version": 3,
+      "password": "lhWGKo/dJHvvMKzuhWX2v1GRIoUOuFb6wCkPLxR2uIk=",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "nijigen-works.jp",
+        "utls":
+        {
+          "enabled": false,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "quick_ip3",
+      "type": "tuic",
+      "server": "www.dtku50.xyz",
+      "server_port": 22335,
+      "uuid": "ef634e71-99e1-4a08-ac38-a3a5d1db4188",
+      "password": "dongtaiwang.com",
+      "congestion_control": "bbr",
+      "udp_relay_mode": "native",
+      "heartbeat": "10s",
+      "connect_timeout": "5s",
+      "tcp_fast_open": true,
+      "udp_over_stream": false,
+      "tcp_multi_path": false,
+      "udp_fragment": false,
+      "fallback_delay": "300ms",
+      "domain_strategy": "prefer_ipv4",
+      "zero_rtt_handshake": false,
+      "tls":
+      {
+        "enabled": true,
+        "insecure": true,
+        "disable_sni": false,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "quick_ip4",
+      "type": "hysteria2",
+      "server": "51.159.77.153",
+      "server_port": 33390,
+      "password": "dongtaiwang.com",
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "domain_strategy": "prefer_ipv4",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "quick_ip4-1",
+      "type": "tuic",
+      "server": "51.159.77.153",
+      "server_port": 44559,
+      "uuid": "2f8f3873-9edf-4c4e-9888-b8a8b2d9d809",
+      "password": "dongtaiwang.com",
+      "congestion_control": "bbr",
+      "udp_relay_mode": "native",
+      "heartbeat": "10s",
+      "connect_timeout": "5s",
+      "tcp_fast_open": true,
+      "udp_over_stream": false,
+      "tcp_multi_path": false,
+      "udp_fragment": false,
+      "fallback_delay": "300ms",
+      "domain_strategy": "prefer_ipv4",
+      "zero_rtt_handshake": false,
+      "tls":
+      {
+        "enabled": true,
+        "insecure": true,
+        "disable_sni": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "xray_ip1",
+      "type": "shadowsocks",
+      "server": "www.dtku44.xyz",
+      "server_port": 22335,
+      "method": "2022-blake3-aes-256-gcm",
+      "password": "oats+7vdaSOb4NsxWwCBQll4qTwPu/dhpegiIGnqd9c=",
+      "multiplex":
+      {
+        "enabled": true
+      },
+      "reuse_addr": false,
+      "connect_timeout": "5s",
+      "tcp_fast_open": true,
+      "tcp_multi_path": false,
+      "udp_fragment": false,
+      "domain_strategy": "prefer_ipv4",
+      "fallback_delay": "300ms"
+    },
+    {
+      "tag": "xray_ip2",
+      "type": "vless",
+      "server": "yh7.dtku41.xyz",
+      "server_port": 443,
+      "uuid": "ebfdccb6-7416-4b6e-860d-98587344d500",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "lg1.freessr2.xyz",
+        "utls":
+        {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "packet_encoding": "xudp",
+      "transport":
+      {
+        "type": "ws",
+        "path": "/xyakws",
+        "headers":
+        {
+          "Host": "lg1.freessr2.xyz"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      }
+    },
+    {
+      "tag": "xray_ip3",
+      "type": "vless",
+      "server": "yh6.dtku41.xyz",
+      "server_port": 443,
+      "uuid": "ebfdccb6-7416-4b6e-860d-98587344d500",
+      "packet_encoding": "xudp",
+      "tls":
+      {
+        "enabled": true,
+        "insecure": true,
+        "disable_sni": false,
+        "server_name": "lg1.freessr2.xyz",
+        "utls":
+        {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport":
+      {
+        "type": "ws",
+        "path": "/xyakws",
+        "headers":
+        {
+          "Host": "lg1.freessr2.xyz"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      }
+    },
+    {
+      "tag": "xray_ip4",
+      "type": "vless",
+      "server": "yh9.dtku41.xy",
+      "server_port": 443,
+      "uuid": "ebfdccb6-7416-4b6e-860d-98587344d500",
+      "packet_encoding": "xudp",
+      "tls":
+      {
+        "enabled": true,
+        "insecure": true,
+        "disable_sni": false,
+        "server_name": "lg1.freessr2.xyz",
+        "utls":
+        {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport":
+      {
+        "type": "ws",
+        "path": "/xyakws",
+        "headers":
+        {
+          "Host": "lg1.freessr2.xyz"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      }
+    },
+    {
+      "tag": "sing_ip1",
+      "type": "hysteria2",
+      "server": "104.192.224.139",
+      "server_port": 33440,
+      "password": "dongtaiwang.com",
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "sing_ip1-1",
+      "type": "hysteria",
+      "server": "104.192.224.139",
+      "server_port": 55118,
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tcp_fast_open": true,
+      "connect_timeout": "5s",
+      "domain_strategy": "prefer_ipv4",
+      "fallback_delay": "300ms",
+      "recv_window_conn": 0,
+      "recv_window": 0,
+      "disable_mtu_discovery": false,
+      "auth_str": "dongtaiwang.com",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "sing_ip2",
+      "type": "hysteria",
+      "server": "www.dtku50.xyz",
+      "server_port": 44001,
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tcp_fast_open": true,
+      "connect_timeout": "5s",
+      "domain_strategy": "prefer_ipv4",
+      "fallback_delay": "300ms",
+      "recv_window_conn": 0,
+      "recv_window": 0,
+      "disable_mtu_discovery": false,
+      "auth_str": "dongtaiwang.com",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "type": "shadowsocks",
+      "tag": "sing_ip3",
+      "method": "2022-blake3-chacha20-poly1305",
+      "password": "6qfEwR4QOrHq+k3csNdEZgMa+Y890g/eouGnVEtxb0c=",
+      "detour": "sing_ip3_stls",
+      "multiplex":
+      {
+        "enabled": true,
+        "protocol": "h2mux",
+        "max_connections": 1,
+        "min_streams": 4,
+        "padding": false
+      }
+    },
+    {
+      "type": "shadowtls",
+      "tag": "sing_ip3_stls",
+      "server": "www2.dtku44.xyz",
+      "server_port": 443,
+      "version": 3,
+      "password": "LdjpJtNZK+2WhXfRY+FxR9sokcOYoddKAx8dN7q8FOI=",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "nijigen-works.jp",
+        "utls":
+        {
+          "enabled": false,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "shadowsocks",
+      "tag": "sing_ip4",
+      "method": "2022-blake3-chacha20-poly1305",
+      "password": "5IH4rBauUuOT4VpAshgMPMSQ3Tf+oJjDY/jEDbIel2Q=",
+      "detour": "sing_ip4_stls",
+      "multiplex":
+      {
+        "enabled": true,
+        "protocol": "h2mux",
+        "max_connections": 1,
+        "min_streams": 4,
+        "padding": false
+      }
+    },
+    {
+      "type": "shadowtls",
+      "tag": "sing_ip4_stls",
+      "server": "172.83.156.157",
+      "server_port": 44550,
+      "version": 3,
+      "password": "FHDLxKgzbcDCPmijble8uT1gddgBmOxA1XXeDgyqgGc=",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "nijigen-works.jp",
+        "utls":
+        {
+          "enabled": false,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "sing_ip5",
+      "type": "hysteria",
+      "server": "64.31.55.72",
+      "server_port": 55661,
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tcp_fast_open": true,
+      "connect_timeout": "5s",
+      "domain_strategy": "prefer_ipv4",
+      "fallback_delay": "300ms",
+      "recv_window_conn": 0,
+      "recv_window": 0,
+      "disable_mtu_discovery": false,
+      "auth_str": "dongtaiwang.com",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "bing.com",
+        "disable_sni": false,
+        "insecure": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "clash_ip1",
+      "type": "tuic",
+      "server": "51.159.199.102",
+      "server_port": 33008,
+      "uuid": "df19a216-8317-4890-829c-a8b7717d53d6",
+      "password": "dongtaiwang.com",
+      "congestion_control": "bbr",
+      "udp_relay_mode": "native",
+      "heartbeat": "10s",
+      "connect_timeout": "5s",
+      "tcp_fast_open": true,
+      "udp_over_stream": false,
+      "tcp_multi_path": false,
+      "udp_fragment": false,
+      "domain_strategy": "prefer_ipv4",
+      "fallback_delay": "300ms",
+      "zero_rtt_handshake": false,
+      "tls":
+      {
+        "enabled": true,
+        "insecure": true,
+        "disable_sni": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "clash_ip2",
+      "type": "tuic",
+      "server": "www2.dtku48.xyz",
+      "server_port": 33993,
+      "uuid": "ebff50f5-dc0e-4bff-bcdb-3c7d2638e817",
+      "password": "dongtaiwang.com",
+      "congestion_control": "bbr",
+      "udp_relay_mode": "native",
+      "heartbeat": "10s",
+      "connect_timeout": "5s",
+      "tcp_fast_open": true,
+      "udp_over_stream": false,
+      "tcp_multi_path": false,
+      "udp_fragment": false,
+      "domain_strategy": "prefer_ipv4",
+      "fallback_delay": "300ms",
+      "zero_rtt_handshake": false,
+      "tls":
+      {
+        "enabled": true,
+        "insecure": true,
+        "disable_sni": false,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "clash_ip3",
+      "type": "hysteria",
+      "server": "108.181.5.21",
+      "server_port": 44550,
+      "up_mbps": 20,
+      "down_mbps": 100,
+      "tcp_fast_open": true,
+      "connect_timeout": "5s",
+      "domain_strategy": "prefer_ipv4",
+      "fallback_delay": "300ms",
+      "recv_window_conn": 0,
+      "recv_window": 0,
+      "disable_mtu_discovery": false,
+      "auth_str": "dongtaiwang.com",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "bing.com",
+        "insecure": true,
+        "disable_sni": false,
+        "alpn": "h3"
+      }
+    },
+    {
+      "tag": "clash_ip3-1",
+      "type": "shadowsocks",
+      "detour": "claship31out",
+      "method": "2022-blake3-chacha20-poly1305",
+      "password": "G0YFHkYjXjU0wE2eM/7YaFNYCvzKa28VEXjPUclhyrg=",
+      "multiplex":
+      {
+        "enabled": true
+      }
+    },
+    {
+      "type": "shadowtls",
+      "tag": "claship31out",
+      "server": "www2.dtku48.xyz",
+      "server_port": 33001,
+      "version": 3,
+      "password": "fef3d3c2-ab3e-4134-a2f3-0c2d83e0a76d",
+      "tls":
+      {
+        "enabled": true,
+        "server_name": "nijigen-works.jp",
+        "utls":
+        {
+          "enabled": false,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "tag": "clash_ip4",
+      "type": "shadowsocks",
+      "server": "109.104.152.186",
+      "server_port": 11223,
+      "method": "2022-blake3-chacha20-poly1305",
+      "password": "7/bb9x3TJQ4Y5SRA/Al3OdwxIk4uf3Jg8N9wDQg+Uto=",
+      "multiplex":
+      {
+        "enabled": true,
+        "protocol": "smux",
+        "max_connections": 1,
+        "min_streams": 4,
+        "max_streams": 0,
+        "padding": true,
+        "brutal":
+        {
+          "enabled": true,
+          "up_mbps": 11,
+          "down_mbps": 55
+        }
+      }
+    },
+    {
+      "tag": "clash_ip5",
+      "type": "vmess",
+      "server": "yh9.dtku41.xyz",
+      "server_port": 8080,
+      "uuid": "01c3345a-aadb-4e07-a920-947c20d83096",
+      "security": "auto",
+      "alter_id": 0,
+      "network": "tcp",
+      "tls":
+      {
+        "enabled": false,
+        "server_name": "emily-citizen-oxford-gba.trycloudflare.com",
+        "utls":
+        {
+          "enabled": false,
+          "fingerprint": "chrome"
+        }
+      },
+      "packet_encoding": "packetaddr",
+      "transport":
+      {
+        "type": "ws",
+        "path": "01c3345a-aadb-4e07-a920-947c20d83096-vm",
+        "headers":
+        {
+          "host": "emily-citizen-oxford-gba.trycloudflare.com"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      }
+    },
+    {
+      "tag": "clash_ip6",
+      "type": "tuic",
+      "server": "www.dtku40.xyz",
+      "server_port": 33098,
+      "uuid": "fef3d3c2-ab3e-4134-a2f3-0c2d83e0a76d",
+      "password": "dongtaiwang.com",
+      "congestion_control": "bbr",
+      "udp_relay_mode": "native",
+      "heartbeat": "10s",
+      "connect_timeout": "5s",
+      "tcp_fast_open": true,
+      "udp_over_stream": false,
+      "tcp_multi_path": false,
+      "udp_fragment": false,
+      "fallback_delay": "300ms",
+      "zero_rtt_handshake": false,
+      "domain_strategy": "prefer_ipv4",
+      "tls":
+      {
+        "enabled": true,
+        "insecure": true,
+        "disable_sni": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "clash_ip7",
+      "type": "tuic",
+      "server": "74.63.233.74",
+      "server_port": 33441,
+      "uuid": "a258065f-9502-4fe6-b3ed-cf7440e25150",
+      "password": "dongtaiwang.com",
+      "congestion_control": "bbr",
+      "udp_relay_mode": "native",
+      "heartbeat": "10s",
+      "connect_timeout": "5s",
+      "tcp_fast_open": true,
+      "udp_over_stream": false,
+      "tcp_multi_path": false,
+      "udp_fragment": false,
+      "fallback_delay": "300ms",
+      "domain_strategy": "prefer_ipv4",
+      "zero_rtt_handshake": false,
+      "tls":
+      {
+        "enabled": true,
+        "insecure": true,
+        "disable_sni": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "clash_ip13",
+      "type": "vless",
+      "server": "109.104.152.101",
+      "server_port": 13982,
+      "uuid": "85beb960-236b-4634-81ce-6ad66652f928",
+      "network": "tcp",
+      "tls":
+      {
+        "enabled": true,
+        "insecure": true,
+        "disable_sni": false,
+        "server_name": "itunes.apple.com",
+        "utls":
+        {
+          "enabled": true,
+          "fingerprint": "chrome"
+        },
+        "reality":
+        {
+          "enabled": true,
+          "public_key": "HjmsLPRaQqSqtdMMpIpmpoJOKhC0rAOUCHXnz0E89RE",
+          "short_id": "22f6b74f02cc88a6"
+        }
+      },
+      "multiplex":
+      {
+        "enabled": true,
+        "protocol": "h2mux",
+        "max_connections": 1,
+        "min_streams": 4,
+        "padding": true,
+        "brutal":
+        {
+          "enabled": true,
+          "up_mbps": 20,
+          "down_mbps": 100
+        }
+      },
+      "packet_encoding": "xudp"
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    },
+    {
+      "type": "dns",
+      "tag": "dns-out"
+    }
+  ],
+  "experimental":
+  {
+    "cache_file":
+    {
+      "enabled": true,
+      "path": "cache.db",
+      "store_fakeip": true
+    }
+  }
+}
