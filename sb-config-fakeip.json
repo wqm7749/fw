@@ -272,8 +272,6 @@
       "tag": "proxy",
       "type": "selector",
       "outbounds": [
-        "auto",
-        "direct",
         "hy2_ip1",
         "hy2_ip13",
         "hy2_ip2",
@@ -311,9 +309,11 @@
         "clash_ip5",
         "clash_ip6",
         "clash_ip7",
-        "clash_ip13"
+        "clash_ip13",
+        "auto",
+        "direct"
       ],
-      "default": "auto",
+      "default": "clash_ip7",
       "interrupt_exist_connections": true
     },
     {
@@ -1035,7 +1035,7 @@
       "tag": "sing_ip4",
       "method": "2022-blake3-chacha20-poly1305",
       "password": "5IH4rBauUuOT4VpAshgMPMSQ3Tf+oJjDY/jEDbIel2Q=",
-      "detour": "sing_ip4_stls",
+      "detour": "sing-ip4-stls",
       "multiplex":
       {
         "enabled": true,
@@ -1047,7 +1047,7 @@
     },
     {
       "type": "shadowtls",
-      "tag": "sing_ip4_stls",
+      "tag": "sing-ip4-stls",
       "server": "172.83.156.157",
       "server_port": 44550,
       "version": 3,
@@ -1145,6 +1145,34 @@
         ]
       }
     },
+    {
+      "tag": "clash_ip2-1",
+      "type": "tuic",
+      "server": "64.42.176.182",
+      "server_port": 61123,
+      "uuid": "de954fbf-b042-4043-98f1-3cad99dbbf0b",
+      "password": "dongtaiwang.com",
+      "congestion_control": "bbr",
+      "udp_relay_mode": "native",
+      "heartbeat": "10s",
+      "connect_timeout": "5s",
+      "tcp_fast_open": true,
+      "udp_over_stream": false,
+      "tcp_multi_path": false,
+      "udp_fragment": false,
+      "domain_strategy": "prefer_ipv4",
+      "fallback_delay": "300ms",
+      "zero_rtt_handshake": false,
+      "tls":
+      {
+        "enabled": true,
+        "insecure": true,
+        "disable_sni": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },    
     {
       "tag": "clash_ip3",
       "type": "hysteria",
