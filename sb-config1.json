@@ -230,6 +230,7 @@
       },      
       {
         "domain": [
+          "xn--ngstr-lra8j.com",
           "googleapis.cn",
           "google.cn",
           "googleapis.com",
@@ -237,8 +238,7 @@
           "google.com.hk",
           "google.com",
           "google.dev",
-          "gstatic.com",
-          "xn--ngstr-lra8j.com"
+          "gstatic.com"
         ],
         "outbound": "proxy"
       },
@@ -545,6 +545,7 @@
         "sing_ip5",
         "clash_ip1",
         "clash_ip2",
+        "clash_ip2-1",
         "clash_ip3",
         "clash_ip3-1",
         "clash_ip4",
@@ -591,6 +592,7 @@
         "sing_ip5",
         "clash_ip1",
         "clash_ip2",
+        "clash_ip2-1",
         "clash_ip3",
         "clash_ip3-1",
         "clash_ip4",
@@ -1385,6 +1387,34 @@
         ]
       }
     },
+    {
+      "tag": "clash_ip2-1",
+      "type": "tuic",
+      "server": "64.42.176.182",
+      "server_port": 61123,
+      "uuid": "de954fbf-b042-4043-98f1-3cad99dbbf0b",
+      "password": "dongtaiwang.com",
+      "congestion_control": "bbr",
+      "udp_relay_mode": "native",
+      "heartbeat": "10s",
+      "connect_timeout": "5s",
+      "tcp_fast_open": true,
+      "udp_over_stream": false,
+      "tcp_multi_path": false,
+      "udp_fragment": false,
+      "domain_strategy": "prefer_ipv4",
+      "fallback_delay": "300ms",
+      "zero_rtt_handshake": false,
+      "tls":
+      {
+        "enabled": true,
+        "insecure": true,
+        "disable_sni": true,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },    
     {
       "tag": "clash_ip3",
       "type": "hysteria",
