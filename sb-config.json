@@ -164,10 +164,7 @@
         "outbound": "block"
       },
       {
-        "port": [
-          853
-        ],
-        "network": "udp",
+        "port":  853,
         "outbound": "block"
       },
       {
@@ -928,7 +925,7 @@
     {
       "tag": "xray_ip4",
       "type": "vless",
-      "server": "yh3.freeh1.xyz",
+      "server": "yh7.dtku41.xyz",
       "server_port": 443,
       "uuid": "ebfdccb6-7416-4b6e-860d-98587344d500",
       "packet_encoding": "xudp",
